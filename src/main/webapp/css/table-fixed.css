@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/* 見出し行固定テーブル */
+/* https://web.runland.co.jp/frontend/post-6084#:~:text=%E3%81%AA%E3%81%84%E3%81%A8%E3%81%8D%E3%81%AF%EF%BC%9F-,%E6%89%8B%E9%A0%86,%E8%A6%AA%E8%A6%81%E7%B4%A0%E3%82%88%E3%82%8A%E5%A4%A7%E3%81%8D%E3%81%8F%E3%81%99%E3%82%8B%E3%80%82&text=%E2%91%A2%20th%E3%80%81td%E3%81%ABwhite,%E3%82%92%E8%A6%AA%E8%A6%81%E7%B4%A0%E3%81%B8%E5%8A%A0%E3%81%88%E3%82%8B%E3%80%82 */
+
+.table_box{
+  overflow-y: auto;
+  height: 400px;
+  width:1000px;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+th, td {
+  vertical-align: middle;
+  padding: 20px;
+  border: 1px solid #000;
+  color: #000;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+}
+th {
+  background: #000;
+}
+td {
+  background: #fff;
+}
+.sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  border-top: none;
+}
+.sticky::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  background: #ccc;
+  z-index: -1;
+}

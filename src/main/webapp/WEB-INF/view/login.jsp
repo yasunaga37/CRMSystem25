@@ -8,7 +8,10 @@
 
 		<div class="container container-m">
 			<c:if test="${login_error != null }">
-				<div class="alert alert-danger" role="alert">ログイン認証に失敗しました。</div>
+				<div class="alert alert-danger text-center" role="alert"><c:out value="${login_error }"/></div>
+			</c:if>
+			<c:if test="${logout != null}">
+				<div class="alert alert-primary text-center" role="alert"><c:out value="${logout}"/></div>
 			</c:if>
 
 			<form action="index.html" method="post">

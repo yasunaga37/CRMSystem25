@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import logic.CustomerLogic;
 import logic.UserLogic;
@@ -31,8 +32,19 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "WEB-INF/view/login.jsp";
-//		System.out.println(url);
+		String url = null;
+		String action = request.getParameter("action");
+		HttpSession session = request.getSession();
+		if ("home".equals(action)) {
+			url = getCustomerListURL(request);
+		} else if(action == null && session.getAttribute("loginUser") != null) {
+			// セッションスコープが空ではない場合は、廃棄する
+			session.invalidate();
+			request.setAttribute("logout", "ログアウトしました。");
+			url = "WEB-INF/view/login.jsp";
+		} else {
+			url = "WEB-INF/view/login.jsp";
+		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
 	}
@@ -61,14 +73,18 @@ public class LoginServlet extends HttpServlet {
 		UserLogic ulogic = new UserLogic();
 		boolean loginFLG = ulogic.execute(request, user_id, password);
 		if (loginFLG) {
-			CustomerLogic clogic = new CustomerLogic();
-			clogic.executeSelectAllCustomers(request);			
-			url = "WEB-INF/view/customer_list.jsp";
+			url = getCustomerListURL(request);
 		} else {
-			request.setAttribute("login_error", "login_error");
+			request.setAttribute("login_error", "ログイン認証に失敗しました。");
 			url = "WEB-INF/view/login.jsp";
 		}
 		return url;		
+	}
+	
+	private String getCustomerListURL(HttpServletRequest request) {
+		CustomerLogic clogic = new CustomerLogic();
+		clogic.executeSelectAllCustomers(request);	
+		return "WEB-INF/view/customer_list.jsp";
 	}
 
 }

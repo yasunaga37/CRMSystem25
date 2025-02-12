@@ -9,12 +9,12 @@
 			<h3>顧客一覧</h3>
 			<c:choose>
 				<c:when test="${fn:length(customer_list) != 0 }">
+				<div class="table_box">
 					<table class="table table-striped table-light">
 						<thead>
 							<tr class="table-info">
 								<th scope="col" class="sticky">顧客ID</th>
 								<th scope="col" class="sticky">顧客名</th>
-								<th scope="col" class="sticky">郵便番号</th>
 								<th scope="col" class="sticky">地域</th>
 								<th scope="col" class="sticky">顧客担当者</th>
 								<th scope="col" class="sticky">営業担当者</th>
@@ -27,7 +27,6 @@
 									<tr>
 										<td scope="row"><c:out value="${ cstm.customer_id }" /></td>
 										<td><c:out value="${ cstm.customer_name }" /></td>
-										<td><c:out value="${ cstm.postal_code}" /></td>
 										<td><c:out value="${ cstm.area_name }" /></td>
 										<td><c:out value="${ cstm.contact_person_name }" /></td>
 										<td><c:out value="${ cstm.user_name }" /></td>
@@ -37,6 +36,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					</div>
 				</c:when>
 				<c:otherwise>
 					<h4>顧客は登録されていません。</h4>
