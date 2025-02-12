@@ -12,13 +12,13 @@
 					<table class="table table-striped table-light">
 						<thead>
 							<tr class="table-info">
-								<th scope="col">顧客ID</th>
-								<th scope="col">顧客名</th>
-								<th scope="col">郵便番号</th>
-								<th scope="col">地域</th>
-								<th scope="col">顧客担当者</th>
-								<th scope="col">営業担当者</th>
-								<th scope="col"></th>
+								<th scope="col" class="sticky">顧客ID</th>
+								<th scope="col" class="sticky">顧客名</th>
+								<th scope="col" class="sticky">郵便番号</th>
+								<th scope="col" class="sticky">地域</th>
+								<th scope="col" class="sticky">顧客担当者</th>
+								<th scope="col" class="sticky">営業担当者</th>
+								<th scope="col" class="sticky"></th>
 							</tr>
 						</thead>
 						<tbody>
