@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import logic.CustomerLogic;
 import logic.UserLogic;
+import util.LoginUserChecker;
 
 /**
  * Servlet implementation class LoginServlet
@@ -32,17 +33,21 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LoginUserChecker.checkLoginUser(request, response);
 		String url = null;
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
-		if ("home".equals(action)) {
+		
+		if ("home".equals(action) && session.getAttribute("loginUser") != null) {
+			// 顧客一覧画面へ
 			url = getCustomerListURL(request);
-		} else if(action == null && session.getAttribute("loginUser") != null) {
-			// セッションスコープが空ではない場合は、廃棄する
+		} else if ("logout".equals(action) && session.getAttribute("loginUser") != null) {
+			// セッション破棄してログアウト
 			session.invalidate();
 			request.setAttribute("logout", "ログアウトしました。");
 			url = "WEB-INF/view/login.jsp";
 		} else {
+			// 初回アクセス時はログイン画面へ
 			url = "WEB-INF/view/login.jsp";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -81,10 +86,14 @@ public class LoginServlet extends HttpServlet {
 		return url;		
 	}
 	
+	/**
+	 * 顧客一覧画面URLを取得する
+	 * @param request
+	 * @return 顧客一覧画面URL
+	 */
 	private String getCustomerListURL(HttpServletRequest request) {
-		CustomerLogic clogic = new CustomerLogic();
-		clogic.executeSelectAllCustomers(request);	
-		return "WEB-INF/view/customer_list.jsp";
+		CustomerLogic clogic = new CustomerLogic();		
+		return clogic.executeSelectAllCustomers(request);	
 	}
 
 }
