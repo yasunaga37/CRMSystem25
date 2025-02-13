@@ -20,7 +20,7 @@
 	<%-- ナビゲーションバー --%>
 	<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #e3f2fd;">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="index.html" onclick="return confirm('ログアウトしてもよろしいですか？')"> 
+			<a class="navbar-brand" href="index.html?action=logout" onclick="return confirm('ログアウトしてもよろしいですか？')"> 
 				<img src="img/crm.png" alt="logo">顧客管理システム
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

@@ -13,8 +13,9 @@ public class CustomerLogic {
 	/**
 	 * CustomerDOA経由で顧客情報一覧を取得し、requestスコープに格納する
 	 * @param request
+	 * 	@return List<CustomerBean> list
 	 */
-	public void executeSelectAllCustomers (HttpServletRequest request) {
+	public String executeSelectAllCustomers (HttpServletRequest request) {
 		CustomerDAO dao = new CustomerDAO();
 		List<CustomerBean> list = null;
 		try {
@@ -25,7 +26,25 @@ public class CustomerLogic {
 			System.out.println("顧客一覧リストの取得に失敗しました。");
 			e.printStackTrace();
 		}
+		return "WEB-INF/view/customer_list.jsp";
 	}
 	
+	/**
+	 * CustomerDOA経由で顧客詳細情報を取得する
+	 * @param id 顧客ID
+	 * @return 遷移先URL(顧客詳細画面)
+	 */
+	public String executesearchCustomerByID (HttpServletRequest request, int id) {		
+		CustomerDAO dao = new CustomerDAO();
+		CustomerBean customer = null;
+		try {
+			customer = dao.searchCustomerByID(id);
+			request.setAttribute("customer", customer);
+		} catch (SQLException e) {
+			System.out.println("該当顧客の情報取得に失敗しました。");
+			e.printStackTrace();
+		}
+		return "WEB-INF/view/customer_detail.jsp";
+	}
 
 }
