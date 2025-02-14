@@ -36,11 +36,11 @@ public class CustomerDetailServlet extends HttpServlet {
 		// リクエストパラメータの取得
 		String cstmID = request.getParameter("cstmID");
 		int customerID = Integer.parseInt(cstmID);
-		System.out.println("customerID=" + customerID);
+//		System.out.println("customerID=" + customerID);
 		// 顧客情報と遷移先URLの取得
 		CustomerLogic logic = new CustomerLogic();
 		String url = logic.executesearchCustomerByID(request, customerID);
-		System.out.println("url=" + url);
+//		System.out.println("url=" + url);
 		// フォワード
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);		
