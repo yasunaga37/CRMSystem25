@@ -119,5 +119,37 @@ public class CustomerDAO {
 		return customer; 
 	}
 
-
+	/**
+	 * 既存の顧客データを更新する
+	 * @param customer
+	 * @return int 更新したレコード件数
+	 * @throws SQLException
+	 */
+	public int update(CustomerBean customer) throws SQLException {
+		int count = 0;
+		String sql = "UPDATE m_customer "
+						+ " SET "
+						+ " customer_name = ?,  "
+						+ "customer_name_kana = ?, "
+						+ " postal_code = ?, adress = ?, area_code = ?, "
+						+ " contact_person_name = ?, contact_person_name_kana = ?, contact_person_tel = ?, "
+						+ " user_id = ? "
+						+ " WHERE customer_id = ?";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, customer.getCustomer_name());
+			pstmt.setString(2, customer.getCustomer_name_kana());
+			pstmt.setString(3, customer.getPostal_code());
+			pstmt.setString(4, customer.getAdress());
+			pstmt.setString(5, customer.getArea_code());
+			pstmt.setString(6, customer.getContact_person_name());
+			pstmt.setString(7, customer.getContact_person_name_kana());
+			pstmt.setString(8, customer.getContact_person_tel());
+			pstmt.setString(9, customer.getUser_id());
+			pstmt.setInt(10, customer.getCustomer_id());
+			count = pstmt.executeUpdate();
+		} 
+		return count;		
+	}
+	
 }

@@ -34,11 +34,13 @@ public class CustomerDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String update_success = (String) request.getAttribute("update_success");
+		System.out.println("update_success=" + update_success);
 		// ログインチェック
 		LoginUserChecker.checkLoginUser(request, response);
 		// 顧客情報の取得
 		CustomerLogic logic = new CustomerLogic();
-		logic.executesearchCustomerByID(request);
+		logic.searchCustomerByID(request);
 		// フォワード
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/customer_detail.jsp");
 		rd.forward(request, response);		

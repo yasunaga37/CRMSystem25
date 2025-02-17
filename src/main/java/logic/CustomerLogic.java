@@ -34,7 +34,7 @@ public class CustomerLogic {
 	 * @param id 顧客ID
 	 * @return 遷移先URL(顧客詳細画面)
 	 */
-	public void executesearchCustomerByID (HttpServletRequest request) {		
+	public void searchCustomerByID (HttpServletRequest request) {		
 		// リクエストパラメータの取得
 		String customer_id = request.getParameter("customer_id");
 		int id = Integer.parseInt(customer_id);
@@ -47,6 +47,27 @@ public class CustomerLogic {
 			System.out.println("該当顧客の情報取得に失敗しました。");
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * CustomerDOA経由で顧客詳細情報を更新する
+	 * @param request
+	 * @param customer
+	 * @return int 更新したレコード件数
+	 */
+	public int updateCustomer (HttpServletRequest request, CustomerBean customer) {
+		CustomerDAO dao = new CustomerDAO();
+		int count = 0;
+		try {
+			count = dao.update(customer);
+			if (count <= 0) {
+				System.out.println("該当顧客の情報更新に失敗しました。0件更新");
+			}
+		} catch (SQLException e) {
+			System.out.println("該当顧客の情報更新に失敗しました。");
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 }

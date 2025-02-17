@@ -31,16 +31,14 @@
 						</tr>
 						<tr>
 							<th scope="row">顧客名</th>
-							<td colspan="3" class="text-start"><input type="text" name="customer_name" value="${customer.customer_name }" size="70"></td>
-						</tr>
-						<tr>
+							<td class="text-start"><input type="text" name="customer_name" value="${customer.customer_name }" size="70"></td>
 							<th scope="row">カナ</th>
-							<td colspan="3" class="text-start"><input type="text" name="customer_name_kana" value="${customer.customer_name_kana }" size="70"></td>
+							<td class="text-start"><input type="text" name="customer_name_kana" value="${customer.customer_name_kana }" size="70"></td>
 						</tr>
 						<tr>
 							<th scope="row">住所</th>
-							<td colspan="1" class="text-start">〒<input type="text" name="postal_code" value="${customer.postal_code }"></td>
-							<td colspan="2" class="text-start"><input type="text" name="adress" value="${customer.adress}" size="70"></td>
+							<td colspan="3" class="text-start">〒<input type="text" name="postal_code" value="${customer.postal_code }" size="10">
+																<input type="text" name="adress" value="${customer.adress}" size="120"></td>
 						</tr>
 						<tr>
 							<th scope="row">担当者様</th>
@@ -52,7 +50,7 @@
 						</tr>
 						<tr>
 							<th scope="row">TEL</th>
-							<td colspan="3" class="text-start"><input type="text" name="contact_person_tel " value="${customer.contact_person_tel }"></td>
+							<td colspan="3" class="text-start"><input type="text" name="contact_person_tel" value="${customer.contact_person_tel }"></td>
 						</tr>
 						<tr>
 							<th scope="row">営業担当</th>
@@ -77,6 +75,7 @@
 						</tr>
 					</tbody>
 				</table>
+				<input type="hidden" name="id" value="${customer.customer_id }">
 				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="execute_edit">編集</button>
 			</form>
 		</div>

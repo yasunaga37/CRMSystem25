@@ -7,8 +7,17 @@
 	<c:param name="content">
 
 		<div class="container container-m">
+			<c:if test="${update_failed != null }">
+				<div class="alert alert-danger text-center" role="alert"><c:out value="${update_failed }"/></div>
+			</c:if>
+			<c:if test="${update_success != null}">
+				<div class="alert alert-primary text-center" role="alert"><c:out value="${update_success}"/></div>
+			</c:if>
+		
+		
 			<div class="row">
-				<div class="col-md-6" style="background-color: #00FF00">
+<!-- 				<div class="col-md-6" style="background-color: #00FF00"> -->
+					<div class="col-md-6">
 					<h6 class="text-center">顧客情報</h6>
 					<table class="table table-striped">
 						<tbody>
@@ -55,7 +64,8 @@
 					</form>
 				</div>
 
-				<div class="col-md-6" style="background-color: #00FF00">
+<!-- 				<div class="col-md-6" style="background-color: #00FF00"> -->
+					<div class="col-md-6">
 					<h6 class="text-center">お問合せ履歴</h6>
 					<table class="table table-striped">
 						<tbody>
