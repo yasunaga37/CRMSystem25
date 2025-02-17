@@ -51,7 +51,7 @@
 					<form action="customer_edit" method="post" class="text-center">
 						<input type="hidden" name="customer_id" value="${customer.customer_id }">
 						<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_edit">編集</button>
-						<button type="submit" class="btn btn-primary btn-sm px-5">削除</button>
+						<button type="submit" class="btn btn-danger btn-sm px-5">削除</button>
 					</form>
 				</div>
 

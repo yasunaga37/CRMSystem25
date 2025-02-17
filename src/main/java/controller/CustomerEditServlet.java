@@ -58,7 +58,11 @@ public class CustomerEditServlet extends HttpServlet {
 			ulogic.executeSelectAllUsers(request);
 			// 遷移先として顧客編集ページを設定
 			url = "WEB-INF/view/customer_edit.jsp";
+		} else if ("execute_edit".equals(action)) {
+			
 		} else {
+
+		}{
 
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
