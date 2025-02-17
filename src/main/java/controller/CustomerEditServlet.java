@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import logic.AreaLogic;
 import logic.CustomerLogic;
 import logic.UserLogic;
+import model.entity.CustomerBean;
 import util.LoginUserChecker;
 
 /**
@@ -20,19 +21,20 @@ import util.LoginUserChecker;
 @WebServlet("/customer_edit")
 public class CustomerEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CustomerEditServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CustomerEditServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -40,33 +42,85 @@ public class CustomerEditServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// ログインチェック
 		LoginUserChecker.checkLoginUser(request, response);
 		// actionパラメータの取得
 		String action = request.getParameter("action");
 		String url = null;
 		if ("goto_edit".equals(action)) {
-			// 顧客情報を取得
-			CustomerLogic clogic = new CustomerLogic();
-			clogic.executesearchCustomerByID(request);
-			// 地区情報を取得
-			AreaLogic alogic = new AreaLogic();
-			alogic.executeSelectAllArea(request);
-			// ユーザー情報を取得
-			UserLogic ulogic = new UserLogic();
-			ulogic.executeSelectAllUsers(request);
 			// 遷移先として顧客編集ページを設定
-			url = "WEB-INF/view/customer_edit.jsp";
+			url = gotoEditPage(request);
 		} else if ("execute_edit".equals(action)) {
-			
+			// 顧客情報を編集し、レコードを更新する
+			CustomerBean customer = setUpadateCustomerData(request);
+			url = update(request, customer);
 		} else {
-
-		}{
-
+			// do nothing
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
+	}
+
+	/**
+	 * 顧客情報、地区リスト、ユーザーリストを取得する
+	 * @param request
+	 * @return 遷移先URL
+	 */
+	private String gotoEditPage(HttpServletRequest request) {
+		// 顧客情報を取得
+		CustomerLogic clogic = new CustomerLogic();
+		clogic.searchCustomerByID(request);
+		// 地区リストを取得
+		AreaLogic alogic = new AreaLogic();
+		alogic.executeSelectAllArea(request);
+		// ユーザーリストを取得
+		UserLogic ulogic = new UserLogic();
+		ulogic.executeSelectAllUsers(request);
+		return "WEB-INF/view/customer_edit.jsp";
+	}
+	
+	/**
+	 * 既存の顧客レコードを更新し、顧客情報詳細ページへ遷移する
+	 * @param request
+	 * @param customer
+	 * @return 遷移先URL
+	 */
+	private String update(HttpServletRequest request, CustomerBean customer) {
+		CustomerLogic logic = new CustomerLogic();
+		int count = logic.updateCustomer(request, customer);
+		if (count <= 0) {
+			System.out.println("CustomerEditServlet#update 更新に失敗しました。");
+			request.setAttribute("update_failed", "顧客情報を更新出来ませんでした。");
+		} else {
+			request.setAttribute("update_success", "顧客情報を更新しました。");
+		}
+		return "customer_detail?customer_id=" + customer.getCustomer_id();		
+	} 
+	
+	/**
+	 * 顧客編集ページから送信されてデータを元にCustomerBeanを設定する
+	 * @param request
+	 * @return CustomerBean
+	 */
+	private CustomerBean setUpadateCustomerData(HttpServletRequest request) {		
+//		String id = request.getParameter("id");
+		int id = Integer.parseInt(request.getParameter("id"));
+		String area = request.getParameter("area");
+		String name = request.getParameter("customer_name");
+		String name_kana = request.getParameter("customer_name_kana");
+		String postal_code = request.getParameter("postal_code");
+		String adress = request.getParameter("adress");
+		String contact_person_name = request.getParameter("contact_person_name");
+		String contact_person_name_kana = request.getParameter("contact_person_name_kana");
+		String contact_person_tel = request.getParameter("contact_person_tel");
+		String user = request.getParameter("user");
+//		System.out.print(id + "  " + area + "  " + name + "  " + name_kana + "  " + postal_code + "  " + contact_person_name + "  ");
+//		System.out.println(contact_person_name_kana + "  " + contact_person_tel + "  " + user);
+		CustomerBean bean = new CustomerBean
+				(id, name, name_kana, postal_code, adress, area, contact_person_name, contact_person_name_kana, contact_person_tel, user);
+		return bean;		
 	}
 
 }
