@@ -42,8 +42,8 @@ public class UserLogic {
 	public void executeSelectAllUsers(HttpServletRequest request) {
 		UserDAO dao = new UserDAO();
 		try {
-			List<UserBean> userList = dao.selectAllUsers();
-			request.setAttribute("userList", userList);
+			List<UserBean> user_list = dao.selectAllUsers();
+			request.setAttribute("user_list", user_list);
 		} catch (SQLException e) {
 			System.out.println("ログイン可能な営業部員リストの取得に失敗しました。");
 			e.printStackTrace();
