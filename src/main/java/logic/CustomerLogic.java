@@ -34,7 +34,10 @@ public class CustomerLogic {
 	 * @param id 顧客ID
 	 * @return 遷移先URL(顧客詳細画面)
 	 */
-	public String executesearchCustomerByID (HttpServletRequest request, int id) {		
+	public void executesearchCustomerByID (HttpServletRequest request) {		
+		// リクエストパラメータの取得
+		String customer_id = request.getParameter("customer_id");
+		int id = Integer.parseInt(customer_id);
 		CustomerDAO dao = new CustomerDAO();
 		CustomerBean customer = null;
 		try {
@@ -44,7 +47,6 @@ public class CustomerLogic {
 			System.out.println("該当顧客の情報取得に失敗しました。");
 			e.printStackTrace();
 		}
-		return "WEB-INF/view/customer_detail.jsp";
 	}
 
 }

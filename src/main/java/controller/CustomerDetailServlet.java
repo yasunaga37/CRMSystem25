@@ -28,21 +28,19 @@ public class CustomerDetailServlet extends HttpServlet {
     }
 
 	/**
+	 * ログインチェックで問題がなければ、以下の処理を行う。(問題発生時はログインページへ差し戻し)
+	 * 顧客IDを取得する
+	 * 該当顧客情報を取得し顧客情報ページへ遷移する
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// ログインチェック
 		LoginUserChecker.checkLoginUser(request, response);
-		// リクエストパラメータの取得
-		String cstmID = request.getParameter("cstmID");
-		int customerID = Integer.parseInt(cstmID);
-//		System.out.println("customerID=" + customerID);
-		// 顧客情報と遷移先URLの取得
+		// 顧客情報の取得
 		CustomerLogic logic = new CustomerLogic();
-		String url = logic.executesearchCustomerByID(request, customerID);
-//		System.out.println("url=" + url);
+		logic.executesearchCustomerByID(request);
 		// フォワード
-		RequestDispatcher rd = request.getRequestDispatcher(url);
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/customer_detail.jsp");
 		rd.forward(request, response);		
 	}
 

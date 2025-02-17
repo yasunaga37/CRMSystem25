@@ -30,7 +30,7 @@
 											<td><c:out value="${ cstm.area_name }" /></td>
 											<td><c:out value="${ cstm.contact_person_name }" /></td>
 											<td><c:out value="${ cstm.user_name }" /></td>
-											<td><a href="customer_detail?cstmID=${ cstm.customer_id }">詳細</a></td>
+											<td><a href="customer_detail?customer_id=${ cstm.customer_id }">詳細</a></td>
 										</tr>
 									</c:if>
 								</c:forEach>
