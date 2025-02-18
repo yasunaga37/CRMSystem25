@@ -48,6 +48,11 @@ public class LoginServlet extends HttpServlet {
 			url = "WEB-INF/view/login.jsp";
 		} else {
 			// 初回アクセス時はログイン画面へ
+			// もしセッションが残っていた場合は削除する
+			// (ログアウトせずに閉じるボタンでブラウザを閉じた場合)
+			if (session.getAttribute("loginUser") != null) {			
+				session.invalidate();
+			}
 			url = "WEB-INF/view/login.jsp";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -74,6 +79,7 @@ public class LoginServlet extends HttpServlet {
 		String url = null;
 		String user_id = request.getParameter("user_id");
 		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
 //		System.out.println("user_id: " +user_id);
 		UserLogic ulogic = new UserLogic();
 		boolean loginFLG = ulogic.execute(request, user_id, password);
