@@ -31,22 +31,23 @@
 						</tr>
 						<tr>
 							<th scope="row">顧客名</th>
-							<td class="text-start"><input type="text" name="customer_name" value="${customer.customer_name }" size="70"></td>
+							<td class="text-start"><input type="text" name="customer_name" value="${customer.customer_name }" size="40"></td>
 							<th scope="row">カナ</th>
-							<td class="text-start"><input type="text" name="customer_name_kana" value="${customer.customer_name_kana }" size="70"></td>
+							<td class="text-start"><input type="text" name="customer_name_kana" value="${customer.customer_name_kana }" size="40"></td>
 						</tr>
 						<tr>
 							<th scope="row">住所</th>
 							<td colspan="3" class="text-start">〒<input type="text" name="postal_code" value="${customer.postal_code }" size="10">
-																<input type="text" name="adress" value="${customer.adress}" size="120"></td>
+																<input type="text" name="adress" value="${customer.adress}" size="80"></td>
 						</tr>
 						<tr>
 							<th scope="row">担当者様</th>
-							<td colspan="3" class="text-start"><input type="text" name="contact_person_name" value="${customer.contact_person_name}" size="70"></td>
-						</tr>
-						<tr>
+							<td class="text-start"><input type="text" name="contact_person_lname" value="${last_name}" size="8" placeholder="姓">
+															 <input type="text" name="contact_person_fname" value="${first_name}" size="8" placeholder="名">
 							<th scope="row">カナ</th>
-							<td colspan="3" class="text-start"><input type="text" name="contact_person_name_kana" value="${customer.contact_person_name_kana}" size="70"></td>
+							<%-- <td class="text-start"><input type="text" name="contact_person_name_kana" value="${customer.contact_person_name_kana}" size="70"></td> --%>
+							<td class="text-start"><input type="text" name="contact_person_lname_kana" value="${last_name_kana}" size="20">
+															 <input type="text" name="contact_person_fname_kana" value="${first_name_kana}" size="20">
 						</tr>
 						<tr>
 							<th scope="row">TEL</th>
@@ -75,8 +76,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<input type="hidden" name="id" value="${customer.customer_id }">
-				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="execute_edit">編集</button>
+				<input type="hidden" name="customer_id" value="${customer.customer_id }">
+				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="execute_edit">更新する</button>
+				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_detail">顧客情報画面へ戻る</button>
 			</form>
 		</div>
 

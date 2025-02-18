@@ -42,6 +42,7 @@ public class CustomerLogic {
 		CustomerBean customer = null;
 		try {
 			customer = dao.searchCustomerByID(id);
+			splitName(request, customer);
 			request.setAttribute("customer", customer);
 		} catch (SQLException e) {
 			System.out.println("該当顧客の情報取得に失敗しました。");
@@ -68,6 +69,18 @@ public class CustomerLogic {
 			e.printStackTrace();
 		}
 		return count;
+	}
+	
+	private void splitName(HttpServletRequest request, CustomerBean customer) {
+		String[] fullName = customer.getContact_person_name().split("　");
+		request.setAttribute("last_name", fullName[0]);
+		request.setAttribute("first_name", fullName[1]);
+		String[] fullNameKana = customer.getContact_person_name_kana().split("　");
+		request.setAttribute("last_name_kana", fullNameKana[0]);
+		request.setAttribute("first_name_kana", fullNameKana[1]);
+		
+		System.out.println(fullName[0] + " " + fullName[1]);
+		System.out.println(fullNameKana[0] + " " + fullNameKana[1]);
 	}
 
 }
