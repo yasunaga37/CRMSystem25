@@ -78,9 +78,6 @@ public class CustomerLogic {
 		String[] fullNameKana = customer.getContact_person_name_kana().split("　");
 		request.setAttribute("last_name_kana", fullNameKana[0]);
 		request.setAttribute("first_name_kana", fullNameKana[1]);
-		
-		System.out.println(fullName[0] + " " + fullName[1]);
-		System.out.println(fullNameKana[0] + " " + fullNameKana[1]);
 	}
 
 }

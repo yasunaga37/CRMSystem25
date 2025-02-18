@@ -77,7 +77,7 @@
 					</tbody>
 				</table>
 				<input type="hidden" name="customer_id" value="${customer.customer_id }">
-				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="execute_edit">更新する</button>
+				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="execute_edit" onclick="return confirm('この内容で登録してもよろしいですか？')">更新する</button>
 				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_detail">顧客情報画面へ戻る</button>
 			</form>
 		</div>
