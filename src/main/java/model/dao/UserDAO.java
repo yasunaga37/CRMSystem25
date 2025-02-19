@@ -29,7 +29,7 @@ public class UserDAO {
 			ResultSet res = pstmt.executeQuery();
 			if (res.next()) {
 				loginUser = new UserBean();
-				loginUser.setUser_name(user_id);
+				loginUser.setUser_id(user_id);
 				loginUser.setPassword(res.getString("password"));
 				loginUser.setUser_name(res.getString("user_name"));
 				loginUser.setUpdate_datetime(res.getTimestamp("update_datetime"));

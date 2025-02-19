@@ -52,11 +52,10 @@ public class CustomerLogic {
 	
 	/**
 	 * CustomerDOA経由で顧客詳細情報を更新する
-	 * @param request
 	 * @param customer
 	 * @return int 更新したレコード件数
 	 */
-	public int updateCustomer (HttpServletRequest request, CustomerBean customer) {
+	public int updateCustomer (CustomerBean customer) {
 		CustomerDAO dao = new CustomerDAO();
 		int count = 0;
 		try {
@@ -71,6 +70,32 @@ public class CustomerLogic {
 		return count;
 	}
 	
+	/**
+	 * リクエストパラメータから顧客IDを取得し、該当情報を論理削除する
+	 * @param request
+	 * @return 削除レコード数
+	 */
+	public int deleteCustomer (HttpServletRequest request) {
+		int customer_id = Integer.parseInt(request.getParameter("customer_id"));
+		CustomerDAO dao = new CustomerDAO();
+		int count = 0;
+		try {
+			count = dao.deleteCustomerByID(customer_id);
+			if (count <= 0) {
+				System.out.println("該当顧客の情報削除に失敗しました。0件削除");
+			}
+		} catch (SQLException e) {
+			System.out.println("該当顧客の情報削除に失敗しました。");
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	/**
+	 * 第2引数の取引先担当者名を姓と名に分解する
+	 * @param request
+	 * @param customer CustomerBean 
+	 */
 	private void splitName(HttpServletRequest request, CustomerBean customer) {
 		String[] fullName = customer.getContact_person_name().split("　");
 		request.setAttribute("last_name", fullName[0]);

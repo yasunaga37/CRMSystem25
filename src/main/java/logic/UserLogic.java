@@ -49,5 +49,19 @@ public class UserLogic {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean userChrck (HttpServletRequest request) {
+		boolean userFLG = false;
+		HttpSession session = request.getSession();
+		UserBean loginUser = (UserBean) session.getAttribute("loginUser");
+		String user_id = request.getParameter("user_id");
+		String password = request.getParameter("password");
+//		System.out.println(user_id + "  " + password);
+//		System.out.println(loginUser.getUser_id() + "  " + loginUser.getPassword());		
+		if (user_id.equals(loginUser.getUser_id()) && password.equals(loginUser.getPassword())) {
+			userFLG = true;
+		}
+		return userFLG;		
+	}
 
 }

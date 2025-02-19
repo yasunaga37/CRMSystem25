@@ -152,4 +152,24 @@ public class CustomerDAO {
 		return count;		
 	}
 	
+	/**
+	 * 顧客レコードの削除フラグを「1」(削除済み)に設定する
+	 * @param id 顧客ID
+	 * @return int 更新済みレコード数
+	 * @throws SQLException
+	 */
+	public int deleteCustomerByID(int id) throws SQLException {
+		int count = 0;
+		String sql = "UPDATE m_customer "
+				+ " SET "
+				+ " delete_flg = 1 "
+				+ " WHERE customer_id = ?";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, id);
+			count = pstmt.executeUpdate();
+		}
+		return count;
+	}
+	
 }
