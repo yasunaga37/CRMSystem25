@@ -10,7 +10,7 @@
 			<c:choose>
 				<c:when test="${fn:length(customer_list) != 0 }">
 					<div class="table_box">
-						<table class="table table-striped table-light">
+						<table class="table table-striped">
 							<thead>
 								<tr class="table-info">
 									<th scope="col" class="sticky">顧客ID</th>

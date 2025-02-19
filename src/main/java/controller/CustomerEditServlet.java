@@ -92,7 +92,7 @@ public class CustomerEditServlet extends HttpServlet {
 	 */
 	private String update(HttpServletRequest request, CustomerBean customer) {
 		CustomerLogic logic = new CustomerLogic();
-		int count = logic.updateCustomer(request, customer);
+		int count = logic.updateCustomer(customer);
 		if (count <= 0) {
 			System.out.println("CustomerEditServlet#update 更新に失敗しました。");
 			request.setAttribute("update_failed", "顧客情報を更新出来ませんでした。");
