@@ -100,7 +100,6 @@ public class CustomerDAO {
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1, id);
 			ResultSet res = pstmt.executeQuery();
-
 			while (res.next()) {
 				customer = new CustomerBean();
 				customer.setCustomer_id(res.getInt("customer_id"));
@@ -170,6 +169,55 @@ public class CustomerDAO {
 			count = pstmt.executeUpdate();
 		}
 		return count;
+	}
+	
+	/**
+	 * 新規顧客レコードを追加する
+	 * @param customer
+	 * @return int 追加レコード数
+	 * @throws SQLException
+	 */
+	public int insertCustomer (CustomerBean customer) throws SQLException {
+		int count = 0;
+		String sql = "INSERT INTO m_customer ("
+				+ "customer_name, customer_name_kana, "
+				+ "postal_code, adress, area_code, "
+				+ "contact_person_name, contact_person_name_kana, contact_person_tel, "
+				+ "user_id) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, customer.getCustomer_name());
+			pstmt.setString(2, customer.getCustomer_name_kana());
+			pstmt.setString(3, customer.getPostal_code());
+			pstmt.setString(4, customer.getAdress());
+			pstmt.setString(5, customer.getArea_code());
+			pstmt.setString(6, customer.getContact_person_name());
+			pstmt.setString(7, customer.getContact_person_name_kana());
+			pstmt.setString(8, customer.getContact_person_tel());
+			pstmt.setString(9, customer.getUser_id());
+			count = pstmt.executeUpdate();
+		}
+		return count;
+	}
+	
+	/**
+	 * 現在のcustomer_idの最大値を取得する
+	 * @return customer_idの最大値
+	 */
+	public int getMaxCustomerID () {
+		int max = 0;
+		String sql = "SELECT MAX(customer_id) FROM m_customer";
+		try (Connection con = ConnectionManager.getConnection()) {
+			Statement stmt = con.createStatement();
+			ResultSet res = stmt.executeQuery(sql);
+			if (res.next()) {
+				max = res.getInt("MAX(customer_id)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return max;
 	}
 	
 }

@@ -38,7 +38,7 @@ public class CustomerDetailServlet extends HttpServlet {
 		LoginUserChecker.checkLoginUser(request, response);
 		// 顧客情報の取得
 		CustomerLogic logic = new CustomerLogic();
-		logic.searchCustomerByID(request);
+		logic.setCustomerToRequestScope(request);
 		// フォワード
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/customer_detail.jsp");
 		rd.forward(request, response);		

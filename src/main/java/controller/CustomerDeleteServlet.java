@@ -49,14 +49,14 @@ public class CustomerDeleteServlet extends HttpServlet {
 		if ("goto_delete".equals(action)) {
 			// 顧客情報の取得して顧客情報削除画面へ
 			CustomerLogic logic = new CustomerLogic();
-			logic.searchCustomerByID(request);
+			logic.setCustomerToRequestScope(request);
 			url = "WEB-INF/view/customer_delete.jsp";
 		} else if ("execute_delete".equals(action)) {
 			url = delete(request);
 		} else if ("goto_detail".equals(action))  {
 			// 顧客情報の取得して顧客情報画面へ
 			CustomerLogic logic = new CustomerLogic();
-			logic.searchCustomerByID(request);
+			logic.setCustomerToRequestScope(request);
 			url = "WEB-INF/view/customer_detail.jsp";
 		} else if ("goto_list".equals(action)) {
 			// 顧客一覧画面へ
@@ -89,13 +89,13 @@ public class CustomerDeleteServlet extends HttpServlet {
 			} else {
 				request.setAttribute("delete_execute", "以下の顧客情報を削除しました。");
 			}
-			clogic.searchCustomerByID(request);
+			clogic.setCustomerToRequestScope(request);
 			url = "WEB-INF/view/customer_delete.jsp";	
 		} else {
 			// 顧客情報の取得して顧客情報削除画面へ
 			request.setAttribute("delete_error", "ユーザーIDとパスワードが一致しません。");			
 			CustomerLogic clogic = new CustomerLogic();
-			clogic.searchCustomerByID(request);
+			clogic.setCustomerToRequestScope(request);
 			url = "WEB-INF/view/customer_delete.jsp";
 		}		
 		return url;		

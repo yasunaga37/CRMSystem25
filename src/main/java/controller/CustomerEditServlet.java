@@ -74,7 +74,7 @@ public class CustomerEditServlet extends HttpServlet {
 	private String gotoEditPage(HttpServletRequest request) {
 		// 顧客情報を取得
 		CustomerLogic clogic = new CustomerLogic();
-		clogic.searchCustomerByID(request);
+		clogic.setCustomerToRequestScope(request);
 		// 地区リストを取得
 		AreaLogic alogic = new AreaLogic();
 		alogic.executeSelectAllArea(request);
@@ -109,30 +109,10 @@ public class CustomerEditServlet extends HttpServlet {
 	 */
 	private CustomerBean setUpadateCustomerData(HttpServletRequest request) {		
 		int id = Integer.parseInt(request.getParameter("customer_id"));
-		String area = request.getParameter("area");
-		String name = request.getParameter("customer_name");
-		String name_kana = request.getParameter("customer_name_kana");
-		String postal_code = request.getParameter("postal_code");
-		String adress = request.getParameter("adress");
-		
-		// 姓と名を全角スペースで連結させてフルネームを生成(漢字)
-		String contact_person_lname = request.getParameter("contact_person_lname");
-		String contact_person_fname = request.getParameter("contact_person_fname");
-		String fullName = contact_person_lname + "　" + contact_person_fname;
-		String contact_person_name = fullName;	
-		// 姓と名を全角スペースで連結させてフルネームを生成(カナ)
-		String contact_person_lname_kana = request.getParameter("contact_person_lname_kana");
-		String contact_person_fname_kana = request.getParameter("contact_person_fname_kana");
-		String fullName_kana = contact_person_lname_kana + "　" + contact_person_fname_kana;
-		String contact_person_name_kana = fullName_kana;	
-		
-		String contact_person_tel = request.getParameter("contact_person_tel");
-		String user = request.getParameter("user");
-//		System.out.print(id + "  " + area + "  " + name + "  " + name_kana + "  " + postal_code + "  " + contact_person_name + "  ");
-//		System.out.println(contact_person_name_kana + "  " + contact_person_tel + "  " + user);
-		CustomerBean bean = new CustomerBean
-				(id, name, name_kana, postal_code, adress, area, contact_person_name, contact_person_name_kana, contact_person_tel, user);
-		return bean;		
+		CustomerLogic logic = new CustomerLogic();
+		CustomerBean customer = logic.createCustomerByRequestParameter(request);
+		customer.setCustomer_id(id);
+		return customer;		
 	}
 
 }

@@ -11,6 +11,38 @@ import model.entity.CustomerBean;
 public class CustomerLogic {
 	
 	/**
+	 * 顧客編集、および新規顧客登録画面からServlet経由で呼び出され、
+	 * RequestParameterからCustomerを生成する
+	 * @param request
+	 * @return CustomerBean
+	 */
+	public CustomerBean createCustomerByRequestParameter (HttpServletRequest request) {
+		String area = request.getParameter("area");
+		String name = request.getParameter("customer_name");
+		String name_kana = request.getParameter("customer_name_kana");
+		String postal_code = request.getParameter("postal_code");
+		String adress = request.getParameter("adress");
+		
+		// 姓と名を全角スペースで連結させてフルネームを生成(漢字)
+		String contact_person_lname = request.getParameter("contact_person_lname");
+		String contact_person_fname = request.getParameter("contact_person_fname");
+		String fullName = contact_person_lname + "　" + contact_person_fname;
+		String contact_person_name = fullName;	
+		// 姓と名を全角スペースで連結させてフルネームを生成(カナ)
+		String contact_person_lname_kana = request.getParameter("contact_person_lname_kana");
+		String contact_person_fname_kana = request.getParameter("contact_person_fname_kana");
+		String fullName_kana = contact_person_lname_kana + "　" + contact_person_fname_kana;
+		String contact_person_name_kana = fullName_kana;	
+		
+		String contact_person_tel = request.getParameter("contact_person_tel");
+		String user = request.getParameter("user");
+//		System.out.print(area + "  " + name + "  " + name_kana + "  " + postal_code + "  " + contact_person_name + "  ");
+//		System.out.println(contact_person_name_kana + "  " + contact_person_tel + "  " + user);
+		CustomerBean customer = new CustomerBean(name, name_kana, postal_code, adress, area, contact_person_name, contact_person_name_kana, contact_person_tel, user);
+		return customer;
+	}
+	
+	/**
 	 * CustomerDOA経由で顧客情報一覧を取得し、requestスコープに格納する
 	 * @param request
 	 * 	@return List<CustomerBean> list
@@ -30,18 +62,18 @@ public class CustomerLogic {
 	}
 	
 	/**
-	 * CustomerDOA経由で顧客詳細情報を取得する
+	 * 顧客詳細画面から、顧客編集画面へ遷移する過程で呼び出される
+	 * CustomerDOA経由で顧客詳細情報を取得し、取引先担当者名を姓と名に分解する
 	 * @param id 顧客ID
 	 * @return 遷移先URL(顧客詳細画面)
 	 */
-	public void searchCustomerByID (HttpServletRequest request) {		
+	public void setCustomerToRequestScope (HttpServletRequest request) {		
 		// リクエストパラメータの取得
 		String customer_id = request.getParameter("customer_id");
-		int id = Integer.parseInt(customer_id);
-		CustomerDAO dao = new CustomerDAO();
-		CustomerBean customer = null;
+		int id = Integer.parseInt(customer_id);		
+		CustomerDAO dao = new CustomerDAO();		
 		try {
-			customer = dao.searchCustomerByID(id);
+			CustomerBean customer = dao.searchCustomerByID(id);		
 			splitName(request, customer);
 			request.setAttribute("customer", customer);
 		} catch (SQLException e) {
