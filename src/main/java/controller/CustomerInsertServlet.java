@@ -74,8 +74,8 @@ public class CustomerInsertServlet extends HttpServlet {
 				System.out.println("新規顧客登録に失敗しました。");
 				e.printStackTrace();
 			}
-		} else if ("goto_list".equals(action)) {
-			
+		} else {
+			// do nothing
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
