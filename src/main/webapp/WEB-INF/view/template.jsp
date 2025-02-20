@@ -5,6 +5,8 @@
 
 <c:import url="layout.jsp">
 	<c:param name="content">
-
+		<div class="container container-m">
+		
+		</div>
 	</c:param>
 </c:import>
