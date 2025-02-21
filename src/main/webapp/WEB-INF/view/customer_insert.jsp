@@ -25,26 +25,26 @@
 						</tr>
 						<tr>
 							<th scope="row">顧客名</th>
-							<td class="text-start"><input type="text" name="customer_name" size="40"></td>
+							<td class="text-start"><input type="text" name="customer_name" size="40" required="required"></td>
 							<th scope="row">カナ</th>
 							<td class="text-start"><input type="text" name="customer_name_kana" size="40"></td>
 						</tr>
 						<tr>
 							<th scope="row">住所</th>
-							<td colspan="3" class="text-start">〒<input type="text" name="postal_code" size="10"> <input
-								type="text" name="adress" size="80"></td>
+							<td colspan="3" class="text-start">〒<input type="text" name="postal_code" size="10"> 
+																				  <input type="text" name="adress" size="80"></td>
 						</tr>
 						<tr>
 							<th scope="row">担当者様</th>
-							<td class="text-start"><input type="text" name="contact_person_lname" size="8" placeholder="姓"> 
-															 <input type="text" name="contact_person_fname" size="8" placeholder="名">
+							<td class="text-start"><input type="text" name="contact_person_lname" size="8" placeholder="姓" required="required"> 
+															 <input type="text" name="contact_person_fname" size="8" placeholder="名" required="required">
 							<th scope="row">カナ</th>
-							<td class="text-start"><input type="text" name="contact_person_lname_kana" size="20" placeholder="姓"> 
-															 <input type="text" name="contact_person_fname_kana" size="20" placeholder="姓">
+							<td class="text-start"><input type="text" name="contact_person_lname_kana" size="20" placeholder="姓" required="required"> 
+															 <input type="text" name="contact_person_fname_kana" size="20" placeholder="姓" required="required">
 						</tr>
 						<tr>
 							<th scope="row">TEL</th>
-							<td colspan="3" class="text-start"><input type="text" name="contact_person_tel"></td>
+							<td colspan="3" class="text-start"><input type="text" name="contact_person_tel"  required="required"></td>
 						</tr>
 						<tr>
 							<th scope="row">営業担当</th>
