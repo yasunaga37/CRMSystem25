@@ -5,8 +5,9 @@
 
 <c:import url="layout.jsp">
 	<c:param name="content">
-
+		
 		<div class="container container-m">
+			<%-- 顧客情報更新の成功可否を通知するアラート --%>
 			<c:if test="${update_failed != null }">
 				<div class="alert alert-danger text-center" role="alert">
 					<c:out value="${update_failed }" />
@@ -17,8 +18,9 @@
 					<c:out value="${update_success}" />
 				</div>
 			</c:if>
+			<%-- 顧客情報更新の成功可否を通知するアラート ここまで --%>
 
-
+			<%-- 第1列目　顧客情報詳細 --%>
 			<div class="row">
 				<!-- 				<div class="col-md-6" style="background-color: #00FF00"> -->
 				<div class="col-md-6">
@@ -66,7 +68,9 @@
 						<button type="submit" class="btn btn-danger btn-sm px-5" name="action" value="goto_delete">削除</button>
 					</form>
 				</div>
+				<%-- 第1列目　顧客情報詳細 ここまで --%>
 
+				<%-- 第2列目　お問合せ履歴 --%>
 				<div class="col-md-6">
 					<h6 class="text-center">お問合せ履歴</h6>
 					<table class="table table-striped">
@@ -105,6 +109,7 @@
 					</table>
 				</div>
 			</div>
+			<%-- 第2列目　お問合せ履歴 ここまで --%>
 		</div>
 
 	</c:param>
