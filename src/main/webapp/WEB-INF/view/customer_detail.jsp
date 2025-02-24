@@ -76,34 +76,12 @@
 					<table class="table table-striped">
 						<tbody>
 							<tr>
-								<th scope="row">顧客ID</th>
-								<td>${customer.customer_id }</td>
-								<th>地区</th>
-								<td>${customer.area_name }</td>
-							</tr>
-							<tr>
-								<th scope="row">顧客名</th>
-								<td colspan="3" class="text-start">${customer.customer_name }（${customer.customer_name_kana }）</td>
-							</tr>
-							<tr>
-								<th scope="row">住所</th>
-								<td colspan="3" class="text-start">〒${customer.postal_code }<br />${customer.adress }</td>
-							</tr>
-							<tr>
-								<th scope="row">担当者様</th>
-								<td colspan="3" class="text-start">${customer.contact_person_name }（${customer.contact_person_name_kana }）</td>
-							</tr>
-							<tr>
-								<th scope="row">TEL</th>
-								<td colspan="3" class="text-start">${customer.contact_person_tel }</td>
-							</tr>
-							<tr>
-								<th scope="row">営業担当</th>
-								<td colspan="3" class="text-start">${customer.user_name }</td>
-							</tr>
-							<tr>
+								<th scope="row">お問合せ日時</th>
+								<th>内容</th>
+								<th>ステータス</th>
 								<th scope="row">更新日時</th>
-								<td colspan="3" class="text-start"><fmt:formatDate value="${customer.update_datetime}" pattern="yyyy/MM/dd HH:mm:ss" /></td>
+							</tr>
+							<tr>
 							</tr>
 						</tbody>
 					</table>
