@@ -67,6 +67,7 @@
 				</c:when>
 				<c:otherwise>
 					<form action="customer_delete" method="post" class="text-center">
+					<input type="hidden" name="customer_id" value="${customer.customer_id }">
 						<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_list">顧客一覧</button>
 					</form>
 				</c:otherwise>
