@@ -61,7 +61,7 @@ public class CustomerInsertServlet extends HttpServlet {
 			try {
 				int count = dao.insertCustomer(customer);
 				if (count > 0) {
-					System.out.println("新規顧客登録に成功しました。");
+//					System.out.println("新規顧客登録に成功しました。");
 					// 新規顧客の情報を取得して顧客情報詳細画面へ
 					int max_id = dao.getMaxCustomerID();
 					CustomerBean newCustomer = dao.searchCustomerByID(max_id);

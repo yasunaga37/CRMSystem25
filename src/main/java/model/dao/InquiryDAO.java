@@ -1,0 +1,176 @@
+package model.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.entity.Inquiry;
+
+public class InquiryDAO {
+
+	/**
+	 * 顧客IDを元に問合せ一覧を取得する
+	 * @param customerID 顧客ID
+	 * @return List<Inquiry> 当該顧客に関する問合せ一覧
+	 * @throws SQLException
+	 */
+	public List<Inquiry> selectInquiryByCustomerID(int customerID) throws SQLException {
+		List<Inquiry> list = new ArrayList<Inquiry>();
+		String sql = "SELECT"
+				+ "  ti.inquiry_id, "
+				+ "  ti.inquiry_datetime, "
+				+ "  mc.customer_name, "
+				+ "  ms.status_name, "
+				+ "  mu.user_name, "
+				+ "  ti.inquiry_contents, "
+				+ "  ti.reply_contents, "
+				+ "  ti.delete_flg, "
+				+ "  ti.update_datetime "
+				+ "FROM"
+				+ "  t_inquiry ti "
+				+ "  INNER JOIN m_status ms "
+				+ "    ON ti.status_code = ms.status_code "
+				+ "  INNER JOIN m_customer mc "
+				+ "    ON ti.customer_id = mc.customer_id "
+				+ "  INNER JOIN m_user mu "
+				+ "    ON mc.user_id = mu.user_id "
+				+ "WHERE "
+				+ "  mc.customer_id = ?";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, customerID);
+			ResultSet res = pstmt.executeQuery();
+			while (res.next()) {
+				Inquiry inquiry = new Inquiry();
+				inquiry.setId(res.getInt("inquiry_id"));
+				inquiry.setInquiryDatetime(res.getTimestamp("inquiry_datetime"));
+				inquiry.setCustomer_name(res.getString("customer_name"));
+				inquiry.setStatus_name(res.getString("status_name"));
+				inquiry.setUser_name(res.getString("user_name"));
+				inquiry.setInquiry_contents(res.getString("inquiry_contents"));
+				inquiry.setInquiry_contents(res.getString("reply_contents"));
+				inquiry.setDelete_flg(res.getInt("delete_flg"));
+				inquiry.setUpdate_datetime(res.getTimestamp("update_datetime"));
+				list.add(inquiry);
+			}
+		}
+		return list;
+	}
+
+	/**
+	 * 問合せIDを元に1件の問合せ情報を取得する
+	 * @param inquiryID 問合せID
+	 * @return Inquiry 当該IDに関する問合せ情報
+	 * @throws SQLException
+	 */
+	public Inquiry selectInquiryByInquiryID (int inquiryID) throws SQLException {
+		Inquiry inquiry = new Inquiry();
+		String sql = "SELECT"
+				+ "  ti.inquiry_id, "
+				+ "  ti.inquiry_datetime, "
+				+ "  mc.customer_name, "
+				+ "  ti.status_code, "
+				+ "  ms.status_name, "
+				+ "  mu.user_name, "
+				+ "  ti.inquiry_contents, "
+				+ "  ti.reply_contents, "
+				+ "  ti.delete_flg, "
+				+ "  ti.update_datetime "
+				+ "FROM"
+				+ "  t_inquiry ti "
+				+ "  INNER JOIN m_status ms "
+				+ "    ON ti.status_code = ms.status_code "
+				+ "  INNER JOIN m_customer mc "
+				+ "    ON ti.customer_id = mc.customer_id "
+				+ "  INNER JOIN m_user mu "
+				+ "    ON mc.user_id = mu.user_id "
+				+ "WHERE "
+				+ "  ti.inquiry_id = ?";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, inquiryID);
+			ResultSet res = pstmt.executeQuery();
+			while (res.next()) {
+				inquiry.setId(res.getInt("inquiry_id"));
+				inquiry.setInquiryDatetime(res.getTimestamp("inquiry_datetime"));
+				inquiry.setCustomer_name(res.getString("customer_name"));
+				inquiry.setStatus_code(res.getString("status_code"));
+				inquiry.setStatus_name(res.getString("status_name"));
+				inquiry.setUser_name(res.getString("user_name"));
+				inquiry.setInquiry_contents(res.getString("inquiry_contents"));
+				inquiry.setInquiry_contents(res.getString("reply_contents"));
+				inquiry.setDelete_flg(res.getInt("delete_flg"));
+				inquiry.setUpdate_datetime(res.getTimestamp("update_datetime"));
+			}
+		}
+		return inquiry;
+	}
+
+	/**
+	 * 問合せ情報を更新する
+	 * @param inquiry 問合せ情報
+	 * @return int 更新レコード数
+	 * @throws SQLException
+	 */
+	public int editInquiryByInquiryID (Inquiry inquiry) throws SQLException {
+		int count = 0;
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		String sql = "UPDATE t_inquiry "
+					  + " SET "
+					  + " inquiry_contents = ?, reply_contents = ?, status_code = ?, update_datetime = ? "
+					  + " WHERE inquiry_id = ?";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, inquiry.getInquiry_contents());
+			pstmt.setString(2, inquiry.getReply_contents());
+			pstmt.setString(3, inquiry.getStatus_code());
+			pstmt.setTimestamp(4, now);
+			pstmt.setInt(5, inquiry.getId());
+			count = pstmt.executeUpdate();
+		}
+		return count;
+	}
+
+	public int insertInquiry (Inquiry inquiry) throws SQLException {
+		int count = 0;
+		int customerID = inquiry.getCustomer_id();
+		String inquiryContents = inquiry.getInquiry_contents();
+		String replyContents = inquiry.getReply_contents();
+		String statusCode = inquiry.getStatus_code();
+		String sql = "INSERT INTO t_inquiry (customer_id, inquiry_contents, reply_contents, status_code) "
+				+ "VALUES (?, ?, ?, ?)";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1,customerID);
+			pstmt.setString(2, inquiryContents);
+			pstmt.setString(3, replyContents);
+			pstmt.setString(4, statusCode);
+			count = pstmt.executeUpdate();
+		}
+		return count;
+	}
+
+	/**
+	 * 問合せテーブルのレコード数を取得する
+	 * @return 問合せテーブルのレコード数
+	 * @throws SQLException
+	 */
+	public int countRecord() throws SQLException {
+		int count = 0;
+		String sql = "SELECT COUNT(inquiry_id) AS cnt FROM t_inquiry";
+		try (Connection con = ConnectionManager.getConnection();
+				Statement stmt = con.createStatement()) {
+			ResultSet res = stmt.executeQuery(sql);
+			while (res.next()) {
+				count = res.getInt("cnt");
+			}
+		}
+		return count;
+	}
+
+}

@@ -46,12 +46,14 @@ public class CustomerEditServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// ログインチェック
 		LoginUserChecker.checkLoginUser(request, response);
+		// 顧客IDの取得
+		int id = Integer.parseInt(request.getParameter("customer_id"));	
 		// actionパラメータの取得
 		String action = request.getParameter("action");
 		String url = null;
 		if ("goto_edit".equals(action)) {
 			// 遷移先として顧客編集ページを設定
-			url = gotoEditPage(request);
+			url = gotoEditPage(request, id);
 		} else if ("execute_edit".equals(action)) {
 			// 顧客情報を編集し、レコードを更新する
 			CustomerBean customer = setUpadateCustomerData(request);
@@ -71,10 +73,10 @@ public class CustomerEditServlet extends HttpServlet {
 	 * @param request
 	 * @return 遷移先URL
 	 */
-	private String gotoEditPage(HttpServletRequest request) {
+	private String gotoEditPage(HttpServletRequest request, int customer_id) {
 		// 顧客情報を取得
 		CustomerLogic clogic = new CustomerLogic();
-		clogic.setCustomerToRequestScope(request);
+		clogic.setCustomerToRequestScope(request, customer_id);
 		// 地区リストを取得
 		AreaLogic alogic = new AreaLogic();
 		alogic.executeSelectAllArea(request);

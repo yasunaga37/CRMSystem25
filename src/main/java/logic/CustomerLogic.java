@@ -67,13 +67,11 @@ public class CustomerLogic {
 	 * @param id 顧客ID
 	 * @return 遷移先URL(顧客詳細画面)
 	 */
-	public void setCustomerToRequestScope (HttpServletRequest request) {		
-		// リクエストパラメータの取得
-		String customer_id = request.getParameter("customer_id");
-		int id = Integer.parseInt(customer_id);		
+	public void setCustomerToRequestScope (HttpServletRequest request, int customer_id) {		
+		// 顧客情報の取得
 		CustomerDAO dao = new CustomerDAO();		
 		try {
-			CustomerBean customer = dao.searchCustomerByID(id);		
+			CustomerBean customer = dao.searchCustomerByID(customer_id);		
 			splitName(request, customer);
 			request.setAttribute("customer", customer);
 		} catch (SQLException e) {

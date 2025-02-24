@@ -43,20 +43,22 @@ public class CustomerDeleteServlet extends HttpServlet {
 //		System.out.println("CustomerDeleteServlet#doPost");
 		// ログインチェック
 		LoginUserChecker.checkLoginUser(request, response);
+		// 顧客IDの取得
+		int id = Integer.parseInt(request.getParameter("customer_id"));	
 		// パラメータの取得
 		String action = request.getParameter("action");
 		String url = null;
 		if ("goto_delete".equals(action)) {
 			// 顧客情報の取得して顧客情報削除画面へ
 			CustomerLogic logic = new CustomerLogic();
-			logic.setCustomerToRequestScope(request);
+			logic.setCustomerToRequestScope(request, id);
 			url = "WEB-INF/view/customer_delete.jsp";
 		} else if ("execute_delete".equals(action)) {
 			url = delete(request);
 		} else if ("goto_detail".equals(action))  {
 			// 顧客情報の取得して顧客情報画面へ
 			CustomerLogic logic = new CustomerLogic();
-			logic.setCustomerToRequestScope(request);
+			logic.setCustomerToRequestScope(request, id);
 			url = "WEB-INF/view/customer_detail.jsp";
 		} else if ("goto_list".equals(action)) {
 			// 顧客一覧画面へ
@@ -76,6 +78,8 @@ public class CustomerDeleteServlet extends HttpServlet {
 	 * @return 遷移先URL
 	 */
 	private String delete (HttpServletRequest request) {
+		// 顧客IDの取得
+		int id = Integer.parseInt(request.getParameter("customer_id"));	
 		String url = null;
 		UserLogic ulogic = new UserLogic();
 		boolean userFLG = ulogic.userChrck(request);
@@ -89,13 +93,13 @@ public class CustomerDeleteServlet extends HttpServlet {
 			} else {
 				request.setAttribute("delete_execute", "以下の顧客情報を削除しました。");
 			}
-			clogic.setCustomerToRequestScope(request);
+			clogic.setCustomerToRequestScope(request, id);
 			url = "WEB-INF/view/customer_delete.jsp";	
 		} else {
 			// 顧客情報の取得して顧客情報削除画面へ
 			request.setAttribute("delete_error", "ユーザーIDとパスワードが一致しません。");			
 			CustomerLogic clogic = new CustomerLogic();
-			clogic.setCustomerToRequestScope(request);
+			clogic.setCustomerToRequestScope(request, id);
 			url = "WEB-INF/view/customer_delete.jsp";
 		}		
 		return url;		

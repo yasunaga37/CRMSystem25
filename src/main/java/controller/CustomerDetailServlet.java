@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import logic.CustomerLogic;
+import logic.InquiryLogic;
 import util.LoginUserChecker;
 
 /**
@@ -36,9 +37,14 @@ public class CustomerDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// ログインチェック
 		LoginUserChecker.checkLoginUser(request, response);
+		// 顧客IDの取得
+		int id = Integer.parseInt(request.getParameter("customer_id"));	
 		// 顧客情報の取得
-		CustomerLogic logic = new CustomerLogic();
-		logic.setCustomerToRequestScope(request);
+		CustomerLogic clogic = new CustomerLogic();
+		clogic.setCustomerToRequestScope(request, id);
+		// 問合せ情報の取得
+		InquiryLogic ilogic = new InquiryLogic();
+		ilogic.getInquiryListByCustomerID(request, id);
 		// フォワード
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/customer_detail.jsp");
 		rd.forward(request, response);		
