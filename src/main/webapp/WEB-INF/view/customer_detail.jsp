@@ -5,7 +5,7 @@
 
 <c:import url="layout.jsp">
 	<c:param name="content">
-		
+
 		<div class="container container-m">
 			<%-- 顧客情報更新の成功可否を通知するアラート --%>
 			<c:if test="${update_failed != null }">
@@ -25,36 +25,36 @@
 				<!-- 				<div class="col-md-6" style="background-color: #00FF00"> -->
 				<div class="col-md-6">
 					<h6 class="text-center">顧客情報</h6>
-					<table class="table table-striped">
+					<table class="table table-striped table-bordered border-primary">
 						<tbody>
 							<tr>
-								<th scope="row">顧客ID</th>
+								<th scope="row" class="table-info">顧客ID</th>
 								<td>${customer.customer_id }</td>
-								<th>地区</th>
+								<th class="table-info">地区</th>
 								<td>${customer.area_name }</td>
 							</tr>
 							<tr>
-								<th scope="row">顧客名</th>
+								<th scope="row" class="table-info">顧客名</th>
 								<td colspan="3" class="text-start">${customer.customer_name }（${customer.customer_name_kana }）</td>
 							</tr>
 							<tr>
-								<th scope="row">住所</th>
+								<th scope="row" class="table-info">住所</th>
 								<td colspan="3" class="text-start">〒${customer.postal_code }<br />${customer.adress }</td>
 							</tr>
 							<tr>
-								<th scope="row">担当者様</th>
+								<th scope="row" class="table-info">担当者様</th>
 								<td colspan="3" class="text-start">${customer.contact_person_name }（${customer.contact_person_name_kana }）</td>
 							</tr>
 							<tr>
-								<th scope="row">TEL</th>
+								<th scope="row" class="table-info">TEL</th>
 								<td colspan="3" class="text-start">${customer.contact_person_tel }</td>
 							</tr>
 							<tr>
-								<th scope="row">営業担当</th>
+								<th scope="row" class="table-info">営業担当</th>
 								<td colspan="3" class="text-start">${customer.user_name }</td>
 							</tr>
 							<tr>
-								<th scope="row">更新日時</th>
+								<th scope="row" class="table-info">更新日時</th>
 								<td colspan="3" class="text-start"><fmt:formatDate value="${customer.update_datetime}" pattern="yyyy/MM/dd HH:mm:ss" /></td>
 							</tr>
 						</tbody>
@@ -73,18 +73,57 @@
 				<%-- 第2列目　お問合せ履歴 --%>
 				<div class="col-md-6">
 					<h6 class="text-center">お問合せ履歴</h6>
-					<table class="table table-striped">
-						<tbody>
-							<tr>
-								<th scope="row">お問合せ日時</th>
-								<th>内容</th>
-								<th>ステータス</th>
-								<th scope="row">更新日時</th>
-							</tr>
-							<tr>
-							</tr>
-						</tbody>
-					</table>
+					<%-- ${fn:length(inquiry_list)} --%>
+					
+					<%-- 第2列目　お問合せ履歴テーブル用見出し行固定スクロールcss --%>
+					<style>
+						.table_scroll {
+							overflow-y: auto;
+							height: 330px;
+							width:600px;
+							-webkit-overflow-scrolling: touch;
+						}
+					</style>
+					
+					<div class="table_scroll">
+						<table class="table table-striped">
+							<thead>
+								<tr class="table-info">
+									<th scope="col" class="sticky-top">お問合せ日時</th>
+									<th scope="col" class="sticky-top">内容</th>
+									<th scope="col" class="sticky-top">ステータス</th>
+									<!-- <th scope="row">更新日時</th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<c:choose>
+									<c:when test="${fn:length(inquiry_list) != 0}">
+										<c:forEach var="inquiry" items="${inquiry_list}">
+											<tr>
+												<td><fmt:formatDate value="${inquiry.inquiry_datetime}" pattern="yyyy/MM/dd HH:mm" /></td>
+												<td><a href="inquiry_detail?inquiry_id=${ inquiry.id}"><c:out value="${inquiry.inquiry_contents}" /></a></td>
+												<c:choose>
+													<c:when test="${inquiry.status_name == '対応完了'}">
+														<td><c:out value="${inquiry.status_name}" /></td>
+													</c:when>
+													<c:otherwise>
+														<td class="text-danger"><c:out value="${inquiry.status_name}" /></td>
+													</c:otherwise>
+												</c:choose>
+												
+												<%-- 											<td><fmt:formatDate value="${inquiry.update_datetime}" pattern="yyyy/MM/dd HH:mm" /></td> --%>
+											</tr>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td colspan="4">お問合せ履歴はありません</td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			<%-- 第2列目　お問合せ履歴 ここまで --%>
