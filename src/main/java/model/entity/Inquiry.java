@@ -40,6 +40,23 @@ public class Inquiry implements Serializable {
 		this.status_name = status_name;
 		this.update_datetime = update_datetime;
 	}
+	
+	/**
+	 * 既存の問合せオブジェクトの内容を「概略」に置き換える
+	 * @param inquiry
+	 * @param summary
+	 */
+	public Inquiry(Inquiry inquiry, String summary) {
+		this.id = inquiry.getId();
+		this.customer_id = inquiry.getCustomer_id();
+		this.customer_name = inquiry.getCustomer_name();
+		this.inquiry_datetime = inquiry.getInquiry_datetime();
+		this.inquiry_contents = summary;
+		this.reply_contents = inquiry.getReply_contents();
+		this.status_code = inquiry.getStatus_code();
+		this.status_name = inquiry.getStatus_name();
+		this.update_datetime = inquiry.getUpdate_datetime();
+	}
 
 	public int getId() {
 		return id;

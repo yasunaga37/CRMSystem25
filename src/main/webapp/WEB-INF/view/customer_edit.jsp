@@ -8,12 +8,12 @@
 
 		<div class="container container-m">
 			<form action="customer_edit" method="post" class="text-center">
-				<table class="table table-striped">
+				<table class="table table-striped table-bordered border-primary">
 					<tbody>
 						<tr>
-							<th scope="row">顧客ID</th>
+							<th scope="row" class="table-info">顧客ID</th>
 							<td>${customer.customer_id }</td>
-							<th>地区</th>
+							<th class="table-info">地区</th>
 							<td class="text-start">
 								<select name="area">
 									<c:forEach var="area" items="${area_list }">
@@ -30,31 +30,31 @@
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">顧客名</th>
+							<th scope="row" class="table-info">顧客名</th>
 							<td class="text-start"><input type="text" name="customer_name" value="${customer.customer_name }" size="40"></td>
-							<th scope="row">カナ</th>
+							<th scope="row" class="table-info">カナ</th>
 							<td class="text-start"><input type="text" name="customer_name_kana" value="${customer.customer_name_kana }" size="40"></td>
 						</tr>
 						<tr>
-							<th scope="row">住所</th>
+							<th scope="row" class="table-info">住所</th>
 							<td colspan="3" class="text-start">〒<input type="text" name="postal_code" value="${customer.postal_code }" size="10">
 																<input type="text" name="adress" value="${customer.adress}" size="80"></td>
 						</tr>
 						<tr>
-							<th scope="row">担当者様</th>
+							<th scope="row" class="table-info">担当者様</th>
 							<td class="text-start"><input type="text" name="contact_person_lname" value="${last_name}" size="8" placeholder="姓">
 															 <input type="text" name="contact_person_fname" value="${first_name}" size="8" placeholder="名">
-							<th scope="row">カナ</th>
+							<th scope="row" class="table-info">カナ</th>
 							<%-- <td class="text-start"><input type="text" name="contact_person_name_kana" value="${customer.contact_person_name_kana}" size="70"></td> --%>
 							<td class="text-start"><input type="text" name="contact_person_lname_kana" value="${last_name_kana}" size="20">
 															 <input type="text" name="contact_person_fname_kana" value="${first_name_kana}" size="20">
 						</tr>
 						<tr>
-							<th scope="row">TEL</th>
+							<th scope="row" class="table-info">TEL</th>
 							<td colspan="3" class="text-start"><input type="text" name="contact_person_tel" value="${customer.contact_person_tel }"></td>
 						</tr>
 						<tr>
-							<th scope="row">営業担当</th>
+							<th scope="row" class="table-info">営業担当</th>
 							<td colspan="3" class="text-start">
 								<select name="user">
 									<c:forEach var="user" items="${user_list }">
@@ -71,7 +71,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">更新日時</th>
+							<th scope="row" class="table-info">更新日時</th>
 							<td colspan="3" class="text-start"><fmt:formatDate value="${customer.update_datetime}" pattern="yyyy/MM/dd HH:mm:ss" /></td>
 						</tr>
 					</tbody>
