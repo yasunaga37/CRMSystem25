@@ -101,7 +101,7 @@
 										<c:forEach var="inquiry" items="${inquiry_list}">
 											<tr>
 												<td><fmt:formatDate value="${inquiry.inquiry_datetime}" pattern="yyyy/MM/dd HH:mm" /></td>
-												<td><a href="inquiry_detail?inquiry_id=${ inquiry.id}"><c:out value="${inquiry.inquiry_contents}" /></a></td>
+												<td class="text-start text-wrap"><a href="inquiry_detail?inquiry_id=${ inquiry.id}"><c:out value="${inquiry.inquiry_contents}" /></a></td>
 												<c:choose>
 													<c:when test="${inquiry.status_name == '対応完了'}">
 														<td><c:out value="${inquiry.status_name}" /></td>

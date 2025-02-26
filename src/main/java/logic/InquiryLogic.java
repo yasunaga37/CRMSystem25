@@ -50,5 +50,17 @@ public class InquiryLogic {
 		}
 		return summarys;
 	}
+	
+	public Inquiry getInquiryByID (int inquiry_id) {		
+		InquiryDAO dao = new InquiryDAO();
+		Inquiry inquiry = null;
+		try {
+			inquiry = dao.selectInquiryByInquiryID(inquiry_id);
+		} catch (SQLException e) {
+			System.out.println("InquiryLogic#getInquiryByID() 問合せ情報の取得に失敗しました。");
+			e.printStackTrace();
+		}
+		return inquiry;
+	}
 
 }

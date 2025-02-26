@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import logic.CustomerLogic;
+import logic.InquiryLogic;
 import logic.UserLogic;
 import util.LoginUserChecker;
 
@@ -57,8 +58,11 @@ public class CustomerDeleteServlet extends HttpServlet {
 			url = delete(request);
 		} else if ("goto_detail".equals(action))  {
 			// 顧客情報の取得して顧客情報画面へ
-			CustomerLogic logic = new CustomerLogic();
-			logic.setCustomerToRequestScope(request, id);
+			CustomerLogic clogic = new CustomerLogic();
+			clogic.setCustomerToRequestScope(request, id);
+			// 問合せ情報の取得
+			InquiryLogic ilogic = new InquiryLogic();
+			ilogic.getInquiryListByCustomerID(request, id);
 			url = "WEB-INF/view/customer_detail.jsp";
 		} else if ("goto_list".equals(action)) {
 			// 顧客一覧画面へ

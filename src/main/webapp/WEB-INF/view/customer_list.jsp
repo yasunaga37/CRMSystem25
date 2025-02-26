@@ -10,7 +10,7 @@
 			<c:choose>
 				<c:when test="${fn:length(customer_list) != 0 }">
 					<div class="table_box">
-						<table class="table table-striped">
+						<table class="table table-striped table-bordered border-primary">
 							<thead>
 								<tr class="table-info">
 									<th scope="col" class="sticky">顧客ID</th>
@@ -41,8 +41,8 @@
 				<c:otherwise>
 					<h4>顧客は登録されていません。</h4>
 				</c:otherwise>
-
 			</c:choose>
+			
 		</div>
 	</c:param>
 </c:import>

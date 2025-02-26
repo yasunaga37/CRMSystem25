@@ -8,6 +8,7 @@ public class Inquiry implements Serializable {
 	private int id;
 	private int customer_id;
 	private String customer_name;
+	private String contact_person_name;
 	private Timestamp inquiry_datetime;
 	private String inquiry_contents;
 	private String reply_contents;
@@ -144,6 +145,14 @@ public class Inquiry implements Serializable {
 
 	public void setUpdate_datetime(Timestamp update_datetime) {
 		this.update_datetime = update_datetime;
+	}
+
+	public String getContact_person_name() {
+		return contact_person_name;
+	}
+
+	public void setContact_person_name(String contact_person_name) {
+		this.contact_person_name = contact_person_name;
 	}
 
 }
