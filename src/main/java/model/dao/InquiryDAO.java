@@ -53,7 +53,7 @@ public class InquiryDAO {
 				inquiry.setStatus_name(res.getString("status_name"));
 				inquiry.setUser_name(res.getString("user_name"));
 				inquiry.setInquiry_contents(res.getString("inquiry_contents"));
-				inquiry.setInquiry_contents(res.getString("reply_contents"));
+				inquiry.setReply_contents(res.getString("reply_contents"));
 				inquiry.setDelete_flg(res.getInt("delete_flg"));
 				inquiry.setUpdate_datetime(res.getTimestamp("update_datetime"));
 				list.add(inquiry);
@@ -73,7 +73,9 @@ public class InquiryDAO {
 		String sql = "SELECT"
 				+ "  ti.inquiry_id, "
 				+ "  ti.inquiry_datetime, "
+				+ "  mc.customer_id, "
 				+ "  mc.customer_name, "
+				+ "  mc.contact_person_name, "
 				+ "  ti.status_code, "
 				+ "  ms.status_name, "
 				+ "  mu.user_name, "
@@ -98,12 +100,14 @@ public class InquiryDAO {
 			while (res.next()) {
 				inquiry.setId(res.getInt("inquiry_id"));
 				inquiry.setInquiryDatetime(res.getTimestamp("inquiry_datetime"));
+				inquiry.setCustomer_id(res.getInt("customer_id"));
 				inquiry.setCustomer_name(res.getString("customer_name"));
+				inquiry.setContact_person_name(res.getString("contact_person_name"));
 				inquiry.setStatus_code(res.getString("status_code"));
 				inquiry.setStatus_name(res.getString("status_name"));
 				inquiry.setUser_name(res.getString("user_name"));
 				inquiry.setInquiry_contents(res.getString("inquiry_contents"));
-				inquiry.setInquiry_contents(res.getString("reply_contents"));
+				inquiry.setReply_contents(res.getString("reply_contents"));
 				inquiry.setDelete_flg(res.getInt("delete_flg"));
 				inquiry.setUpdate_datetime(res.getTimestamp("update_datetime"));
 			}

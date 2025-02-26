@@ -6,15 +6,17 @@
 <c:import url="layout.jsp">
 	<c:param name="content">
 		<div class="container container-m">
-			<h3>新規顧客登録</h3>
+			<h5 class="text-center">新規顧客登録</h5>
 
 			<form action="customer_insert" method="post" class="text-center">
-				<table class="table table-striped">
+				<div class="d-flex justify-content-center">
+				
+				<table class="table table-striped table-bordered border-primary w-75">
 					<tbody>
 						<tr>
-							<th scope="row">顧客ID</th>
+							<th scope="row" class="table-info text-wrap">顧客ID</th>
 							<td>${customer_id }</td>
-							<th>地区</th>
+							<th class="table-info text-wrap">地区</th>
 							<td class="text-start">
 								<select name="area">
 									<c:forEach var="area" items="${area_list }">
@@ -24,30 +26,30 @@
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">顧客名</th>
+							<th scope="row" class="table-info text-wrap">顧客名</th>
 							<td class="text-start"><input type="text" name="customer_name" size="40" required="required"></td>
-							<th scope="row">カナ</th>
+							<th scope="row" class="table-info text-wrap">カナ</th>
 							<td class="text-start"><input type="text" name="customer_name_kana" size="40"></td>
 						</tr>
 						<tr>
-							<th scope="row">住所</th>
+							<th scope="row" class="table-info text-wrap">住所</th>
 							<td colspan="3" class="text-start">〒<input type="text" name="postal_code" size="10"> 
 																				  <input type="text" name="adress" size="80"></td>
 						</tr>
 						<tr>
-							<th scope="row">担当者様</th>
+							<th scope="row" class="table-info text-wrap">担当者様</th>
 							<td class="text-start"><input type="text" name="contact_person_lname" size="8" placeholder="姓" required="required"> 
 															 <input type="text" name="contact_person_fname" size="8" placeholder="名" required="required">
-							<th scope="row">カナ</th>
+							<th scope="row" class="table-info text-wrap">カナ</th>
 							<td class="text-start"><input type="text" name="contact_person_lname_kana" size="20" placeholder="姓" required="required"> 
 															 <input type="text" name="contact_person_fname_kana" size="20" placeholder="姓" required="required">
 						</tr>
 						<tr>
-							<th scope="row">TEL</th>
+							<th scope="row" class="table-info text-wrap">TEL</th>
 							<td colspan="3" class="text-start"><input type="text" name="contact_person_tel"  required="required"></td>
 						</tr>
 						<tr>
-							<th scope="row">営業担当</th>
+							<th scope="row" class="table-info text-wrap">営業担当</th>
 							<td colspan="3" class="text-start">
 								<select name="user">
 									<c:forEach var="user" items="${user_list }">
@@ -58,6 +60,7 @@
 						</tr>
 					</tbody>
 				</table>
+				</div>
 				<input type="hidden" name="customer_id" value="${customer_id }">
 				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="execute_insert" onclick="return confirm('この内容で登録してもよろしいですか？')">登録</button>
 			</form>

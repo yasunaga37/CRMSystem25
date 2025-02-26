@@ -32,16 +32,25 @@
 		</div>
 	</c:if>
 
-	<form action="index.html" method="post">
-		<div class="mb-3">
-			<label for="exampleInputEmail1" class="form-label">UserID</label> <input type="text" name="user_id" class="form-control" id="user_id"
-				aria-describedby="emailHelp">
+
+	<form action="index.html" method="post">		
+		<div class="mb-3 row d-flex justify-content-center">
+			<label for="staticEmail" class="col-sm-2 col-form-label">ユーザーID</label>
+			<div class="w-25"><input type="text" class="form-control" name="user_id" id="user_id"></div>
 		</div>
-		<div class="mb-3">
-			<label for="exampleInputPassword1" class="form-label">Password</label> <input type="password" name="password" class="form-control" id="password">
+		<div class="mb-3 row d-flex justify-content-center">
+			<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+			<div class="w-25"><input type="password" class="form-control" name="password" id="inputPassword">	</div>
 		</div>
-		<button type="submit" class="btn btn-primary">ログイン</button>
+		<div class="d-flex justify-content-center">
+			<button type="submit" class="btn btn-primary ">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+				ログイン
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+			</button>	
+		</div>
 	</form>
+
 </div>
 
 <%-- フッター --%>

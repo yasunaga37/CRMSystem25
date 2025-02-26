@@ -13,6 +13,7 @@
 <!-- オリジナルCSSの読み込み -->
 <link rel="stylesheet" type="text/css" href="css/components.css">
 <link rel="stylesheet" type="text/css" href="css/table-fixed.css">
+<link rel="stylesheet" type="text/css" href="css/table.css">
 </head>
 
 <body>
