@@ -7,18 +7,20 @@
 	<c:param name="content">
 
 		<div class="container container-m">
-			<%-- 顧客情報更新の成功可否を通知するアラート --%>
-			<c:if test="${update_failed != null }">
-				<div class="alert alert-danger text-center" role="alert">
-					<c:out value="${update_failed }" />
-				</div>
-			</c:if>
-			<c:if test="${update_success != null}">
-				<div class="alert alert-primary text-center" role="alert">
-					<c:out value="${update_success}" />
-				</div>
-			</c:if>
-			<%-- 顧客情報更新の成功可否を通知するアラート ここまで --%>
+			<div class="row">
+				<%-- 顧客情報更新の成功可否を通知するアラート --%>
+				<c:if test="${update_failed != null }">
+					<div class="alert alert-danger text-center" role="alert">
+						<c:out value="${update_failed }" />
+					</div>
+				</c:if>
+				<c:if test="${update_success != null}">
+					<div class="alert alert-primary text-center" role="alert">
+						<c:out value="${update_success}" />
+					</div>
+				</c:if>
+				<%-- 顧客情報更新の成功可否を通知するアラート ここまで --%>
+			</div>
 
 			<%-- 第1列目　顧客情報詳細 --%>
 			<div class="row">
@@ -59,14 +61,16 @@
 							</tr>
 						</tbody>
 					</table>
-					<form action="customer_edit" method="post" class="text-center" style="display: inline-block">
-						<input type="hidden" name="customer_id" value="${customer.customer_id }">
-						<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_edit">編集</button>
-					</form>
-					<form action="customer_delete" method="post" class="text-center" style="display: inline-block">
-						<input type="hidden" name="customer_id" value="${customer.customer_id }">
-						<button type="submit" class="btn btn-danger btn-sm px-5" name="action" value="goto_delete">削除</button>
-					</form>
+					<div class="d-flex justify-content-center">
+						<form action="customer_edit" method="post" class="text-center" style="display: inline-block">
+							<input type="hidden" name="customer_id" value="${customer.customer_id }">
+							<button type="submit" class="btn btn-primary btn-sm px-5 m-1" name="action" value="goto_edit">編集</button>
+						</form>
+						<form action="customer_delete" method="post" class="text-center" style="display: inline-block">
+							<input type="hidden" name="customer_id" value="${customer.customer_id }">
+							<button type="submit" class="btn btn-danger btn-sm px-5 m-1" name="action" value="goto_delete">削除</button>
+						</form>
+					</div>
 				</div>
 				<%-- 第1列目　顧客情報詳細 ここまで --%>
 
@@ -79,14 +83,14 @@
 					<style>
 						.table_scroll {
 							overflow-y: auto;
-							height: 330px;
+							height: 370px;
 							width:600px;
 							-webkit-overflow-scrolling: touch;
 						}
 					</style>
 					
 					<div class="table_scroll">
-						<table class="table table-striped">
+						<table class="table table-striped table-bordered border-primary">
 							<thead>
 								<tr class="table-info">
 									<th scope="col" class="sticky-top">お問合せ日時</th>
@@ -110,8 +114,6 @@
 														<td class="text-danger"><c:out value="${inquiry.status_name}" /></td>
 													</c:otherwise>
 												</c:choose>
-												
-												<%-- 											<td><fmt:formatDate value="${inquiry.update_datetime}" pattern="yyyy/MM/dd HH:mm" /></td> --%>
 											</tr>
 										</c:forEach>
 									</c:when>
@@ -124,6 +126,14 @@
 							</tbody>
 						</table>
 					</div>
+					
+					<!-- <div class="d-flex justify-content-center"> -->
+						<form action="customer_edit" method="post" class="text-center">
+							<input type="hidden" name="customer_id" value="${customer.customer_id }">
+							<button type="submit" class="btn btn-primary btn-sm px-5 m-4" name="action" value="goto_delete">新規お問合せ登録</button>
+						</form>
+					<!-- </div> -->
+					
 				</div>
 			</div>
 			<%-- 第2列目　お問合せ履歴 ここまで --%>

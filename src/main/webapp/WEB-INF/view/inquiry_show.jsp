@@ -7,7 +7,7 @@
 	<c:param name="content">
 		<div class="container container-m">
 
-			<%-- <c:out value="${inquiry.customer_id}" /> --%>
+			<h6 class="text-center">お問合せ詳細</h6>
 			<div class="table_inquiry d-flex justify-content-center">
 				<table class="w-75 table table-striped table-bordered border-primary">
 					<tbody>
