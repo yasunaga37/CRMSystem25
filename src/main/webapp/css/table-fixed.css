@@ -9,12 +9,12 @@
   width:1000px;
   -webkit-overflow-scrolling: touch;
 }
-table {
+.table_box table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
 }
-th, td {
+.table_box table th, td {
   vertical-align: middle;
   padding: 20px;
   border: 1px solid #000;
@@ -23,10 +23,10 @@ th, td {
   text-align: center;
   white-space: nowrap;
 }
-th {
+.table_box table th {
   background: #000;
 }
-td {
+.table_box table td {
   background: #fff;
 }
 .sticky {

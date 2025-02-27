@@ -42,7 +42,7 @@
 															 <input type="text" name="contact_person_fname" size="8" placeholder="名" required="required">
 							<th scope="row" class="table-info text-wrap">カナ</th>
 							<td class="text-start"><input type="text" name="contact_person_lname_kana" size="20" placeholder="姓" required="required"> 
-															 <input type="text" name="contact_person_fname_kana" size="20" placeholder="姓" required="required">
+															 <input type="text" name="contact_person_fname_kana" size="20" placeholder="名" required="required">
 						</tr>
 						<tr>
 							<th scope="row" class="table-info text-wrap">TEL</th>
