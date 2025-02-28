@@ -87,13 +87,43 @@ public class InquiryLogic {
 	}
 	public Inquiry newInquiry(HttpServletRequest request) {
 		String status = request.getParameter("status");
-		String strDatetime1 = request.getParameter("inquiry_datetime");
+		Timestamp inquiry_datetime = stringToTimestamp(request, "inquiry_datetime");
+		int customer_id = Integer.parseInt(request.getParameter("customer_id"));
+//		CustomerLogic clogic = new CustomerLogic();
+//		CustomerBean customer = clogic.getCustomerByID(customer_id);
+		String inquiry_contents = request.getParameter("inquiry_contents");
+		String reply_contents = request.getParameter("reply_contents");
+		
+//		System.out.println(status + "  " + inquiry_datetime + "  " + customer_id);
+//		System.out.println(inquiry_contents + "  " + reply_contents);
+		
+		Inquiry inquiry = new Inquiry(customer_id, inquiry_datetime, inquiry_contents, reply_contents, status);
+		return inquiry;		
+	}
+	
+	public void insertNewInquiry(Inquiry inquiry) {
+		InquiryDAO dao = new InquiryDAO();
+		try {
+			int count = dao.insertInquiry(inquiry);
+			System.out.println(count);
+		} catch (SQLException e) {
+			System.out.println("InquiryLogic#newInquiry() 新規問合せの挿入に失敗しました。");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 時刻文字列(yyyy-MM-dd'T'HH:mm:ss)をjava.sql.Timestamp型へ変換する
+	 * @param request
+	 * @param param 時刻文字列(yyyy-MM-dd'T'HH:mm:ss)
+	 * @return timestamp
+	 */
+	private Timestamp stringToTimestamp(HttpServletRequest request, String param) {
+		String strDatetime1 = request.getParameter(param) + ":00";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(strDatetime1, formatter);
-
         Timestamp timestamp = Timestamp.valueOf(dateTime);
-		System.out.println(status + "  " + timestamp);
-		return null;		
+		return timestamp;
 	}
 
 }

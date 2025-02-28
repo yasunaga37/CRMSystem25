@@ -42,6 +42,15 @@ public class Inquiry implements Serializable {
 		this.update_datetime = update_datetime;
 	}
 	
+	public Inquiry(int customer_id, Timestamp inquiry_datetime, String inquiry_contents, 
+			String reply_contents, String status_code) {
+		this.customer_id = customer_id;
+		this.inquiry_datetime = inquiry_datetime;
+		this.inquiry_contents = inquiry_contents;
+		this.reply_contents = reply_contents;
+		this.status_code = status_code;
+	}
+	
 	/**
 	 * 既存の問合せオブジェクトの内容を「概略」に置き換える
 	 * @param inquiry

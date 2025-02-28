@@ -56,7 +56,7 @@ public class InquiryInsertServlet extends HttpServlet {
 			//顧客詳細画面へ戻る
 			url = gotoCustomerDetail(request, customer_id);
 		} else if ("inquiry_insert_execute".equals(action)) {
-			url = executeInsert(request);
+			url = executeInsert(request, customer_id);
 		}
 		// ディスパッチ
 		RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -99,11 +99,12 @@ public class InquiryInsertServlet extends HttpServlet {
 		return "WEB-INF/view/customer_detail.jsp";
 	}
 	
-	private String executeInsert(HttpServletRequest request) {
+	private String executeInsert(HttpServletRequest request, int customer_id) {
 //		System.out.println("AAAAAAAAA");
 		InquiryLogic logic = new InquiryLogic();
 		Inquiry inquiry = logic.newInquiry(request);
-		return null;		
+		logic.insertNewInquiry(inquiry);
+		return gotoCustomerDetail(request, customer_id);		
 	}
 
 }

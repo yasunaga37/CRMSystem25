@@ -10,6 +10,18 @@ import model.entity.CustomerBean;
 
 public class CustomerLogic {
 	
+	public CustomerBean getCustomerByID(int customer_id) {
+		CustomerDAO dao = new CustomerDAO();
+		CustomerBean customer = null;
+		try {
+			customer = dao.searchCustomerByID(customer_id);
+		} catch (SQLException e) {
+			System.out.println("CustomerLogic#getCustomerByID() 該当顧客の取得に失敗しました。");
+			e.printStackTrace();
+		}
+		return customer;
+	}
+	
 	/**
 	 * 顧客編集、および新規顧客登録画面からServlet経由で呼び出され、
 	 * RequestParameterからCustomerを生成する
