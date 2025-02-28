@@ -38,11 +38,11 @@
 						</tr>
 						<tr>
 							<th scope="row" class="table-info">お問合内容</th>
-							<td colspan="3" class="text-start text-wrap"><c:out value="${inquiry.inquiry_contents }" /></td>
+							<td colspan="3" class="text-start" style="white-space: pre-wrap;"><c:out value="${inquiry.inquiry_contents }" /></td>
 						</tr>
 						<tr>
 							<th scope="row" class="table-info">回答</th>
-							<td colspan="3" class="text-start text-wrap"><c:out value="${inquiry.reply_contents }" /></td>
+							<td colspan="3" class="text-start" style="white-space: pre-wrap;"><c:out value="${inquiry.reply_contents }" /></td>
 						</tr>
 						<tr>
 							<th scope="row" class="table-info text-wrap">更新日時</th>

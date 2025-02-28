@@ -85,22 +85,28 @@ public class InquiryLogic {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * リクエストパラメータから新規問合せオブジェクトを生成する
+	 * @param request
+	 * @return inquiry
+	 */
 	public Inquiry newInquiry(HttpServletRequest request) {
 		String status = request.getParameter("status");
 		Timestamp inquiry_datetime = stringToTimestamp(request, "inquiry_datetime");
 		int customer_id = Integer.parseInt(request.getParameter("customer_id"));
-//		CustomerLogic clogic = new CustomerLogic();
-//		CustomerBean customer = clogic.getCustomerByID(customer_id);
 		String inquiry_contents = request.getParameter("inquiry_contents");
-		String reply_contents = request.getParameter("reply_contents");
-		
+		String reply_contents = request.getParameter("reply_contents");		
 //		System.out.println(status + "  " + inquiry_datetime + "  " + customer_id);
-//		System.out.println(inquiry_contents + "  " + reply_contents);
-		
+//		System.out.println(inquiry_contents + "  " + reply_contents);		
 		Inquiry inquiry = new Inquiry(customer_id, inquiry_datetime, inquiry_contents, reply_contents, status);
 		return inquiry;		
 	}
 	
+	/**
+	 * 問合せオブジェクトを新規レコードとして挿入する
+	 * @param inquiry
+	 */
 	public void insertNewInquiry(Inquiry inquiry) {
 		InquiryDAO dao = new InquiryDAO();
 		try {

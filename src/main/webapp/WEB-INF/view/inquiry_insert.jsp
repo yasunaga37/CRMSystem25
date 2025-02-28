@@ -45,11 +45,11 @@
 							</tr>
 							<tr>
 								<th scope="row" class="table-info">お問合内容</th>
-								<td colspan="3" class="text-start text-wrap"><textarea name="inquiry_contents" cols="70" rows="3"></textarea></td>
+								<td colspan="3" class="text-start text-wrap"><textarea name="inquiry_contents" cols="70" rows="3" required="required"></textarea></td>
 							</tr>
 							<tr>
 								<th scope="row" class="table-info">回答</th>
-								<td colspan="3" class="text-start text-wrap"><textarea name="reply_contents" cols="70" rows="3"></textarea></td>
+								<td colspan="3" class="text-start text-wrap"><textarea name="reply_contents" cols="70" rows="3" required="required"></textarea></td>
 							</tr>
 						</tbody>
 					</table>
