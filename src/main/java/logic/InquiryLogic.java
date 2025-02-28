@@ -1,6 +1,9 @@
 package logic;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +54,11 @@ public class InquiryLogic {
 		return summarys;
 	}
 	
+	/**
+	 * お問合せIDから該当する問合せを取得する
+	 * @param inquiry_id
+	 * @return　Inquiry inquiry
+	 */
 	public Inquiry getInquiryByID (int inquiry_id) {		
 		InquiryDAO dao = new InquiryDAO();
 		Inquiry inquiry = null;
@@ -61,6 +69,31 @@ public class InquiryLogic {
 			e.printStackTrace();
 		}
 		return inquiry;
+	}
+	
+	/**
+	 * お問合せ番号の「最大値 + 1」を取得しリクエストスコープに格納する
+	 * @param request
+	 */
+	public void getMaxInquiryID(HttpServletRequest request) {
+		InquiryDAO dao = new InquiryDAO();
+		try {
+			int max = dao.getMaxID() + 1;
+			request.setAttribute("max_id", max);
+		} catch (SQLException e) {
+			System.out.println("InquiryLogic#InquiryLogic() MAX IDの取得に失敗しました。");
+			e.printStackTrace();
+		}
+	}
+	public Inquiry newInquiry(HttpServletRequest request) {
+		String status = request.getParameter("status");
+		String strDatetime1 = request.getParameter("inquiry_datetime");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(strDatetime1, formatter);
+
+        Timestamp timestamp = Timestamp.valueOf(dateTime);
+		System.out.println(status + "  " + timestamp);
+		return null;		
 	}
 
 }

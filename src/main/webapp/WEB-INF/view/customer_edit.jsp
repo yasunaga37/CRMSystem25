@@ -16,7 +16,8 @@
 								<th scope="row" class="table-info">顧客ID</th>
 								<td>${customer.customer_id }</td>
 								<th class="table-info">地区</th>
-								<td class="text-start"><select name="area">
+								<td class="text-start">
+									<select name="area">
 										<c:forEach var="area" items="${area_list }">
 											<c:choose>
 												<c:when test="${ area.area_name==customer.area_name }">
@@ -27,7 +28,8 @@
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
-								</select></td>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<th scope="row" class="table-info">顧客名</th>

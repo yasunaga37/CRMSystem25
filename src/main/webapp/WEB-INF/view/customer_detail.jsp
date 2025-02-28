@@ -128,9 +128,9 @@
 					</div>
 					
 					<!-- <div class="d-flex justify-content-center"> -->
-						<form action="customer_edit" method="post" class="text-center">
+						<form action="inquiry_insert" method="get" class="text-center">
 							<input type="hidden" name="customer_id" value="${customer.customer_id }">
-							<button type="submit" class="btn btn-primary btn-sm px-5 m-4" name="action" value="goto_delete">新規お問合せ登録</button>
+							<button type="submit" class="btn btn-primary btn-sm px-5 m-4" name="action" value="goto_inquiry_insert">新規お問合せ登録</button>
 						</form>
 					<!-- </div> -->
 					

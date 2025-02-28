@@ -11,6 +11,11 @@ import model.entity.StatusBean;
 
 public class StatusDAO {
 	
+	/**
+	 * 問合せステータスの一覧リスト」を取得する
+	 * @return List<StatusBean>
+	 * @throws SQLException
+	 */
 	public List<StatusBean> selectAllStatus () throws SQLException {
 		List<StatusBean> list = new ArrayList<StatusBean>();
 		String sql = "SELECT * FROM m_status";
@@ -18,8 +23,8 @@ public class StatusDAO {
 				Statement stmt = con.createStatement();
 				ResultSet res = stmt.executeQuery(sql)) {
 			while (res.next()) {
-				StatusBean status = new StatusBean();
-				status.setStatus_name(res.getString("status_code"));
+				StatusBean status = new StatusBean();				
+				status.setStatus_code(res.getString("status_code"));
 				status.setStatus_name(res.getString("status_name"));
 				list.add(status);
 			}

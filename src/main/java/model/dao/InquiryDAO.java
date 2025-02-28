@@ -160,13 +160,13 @@ public class InquiryDAO {
 	}
 
 	/**
-	 * 問合せテーブルのレコード数を取得する
+	 * 問合せテーブルの問合せIDの最大値を取得する
 	 * @return 問合せテーブルのレコード数
 	 * @throws SQLException
 	 */
-	public int countRecord() throws SQLException {
+	public int getMaxID() throws SQLException {
 		int count = 0;
-		String sql = "SELECT COUNT(inquiry_id) AS cnt FROM t_inquiry";
+		String sql = "SELECT MAX(inquiry_id) AS cnt FROM t_inquiry";
 		try (Connection con = ConnectionManager.getConnection();
 				Statement stmt = con.createStatement()) {
 			ResultSet res = stmt.executeQuery(sql);
@@ -174,6 +174,7 @@ public class InquiryDAO {
 				count = res.getInt("cnt");
 			}
 		}
+//		System.out.println("count=" + count);
 		return count;
 	}
 
