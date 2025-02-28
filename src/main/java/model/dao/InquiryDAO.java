@@ -143,17 +143,19 @@ public class InquiryDAO {
 	public int insertInquiry (Inquiry inquiry) throws SQLException {
 		int count = 0;
 		int customerID = inquiry.getCustomer_id();
+		Timestamp inquiry_datetime = inquiry.getInquiry_datetime();
 		String inquiryContents = inquiry.getInquiry_contents();
 		String replyContents = inquiry.getReply_contents();
 		String statusCode = inquiry.getStatus_code();
-		String sql = "INSERT INTO t_inquiry (customer_id, inquiry_contents, reply_contents, status_code) "
-				+ "VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO t_inquiry (customer_id, inquiry_datetime, inquiry_contents, reply_contents, status_code) "
+				+ "VALUES (?, ?, ?, ?, ?)";
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setInt(1,customerID);
-			pstmt.setString(2, inquiryContents);
-			pstmt.setString(3, replyContents);
-			pstmt.setString(4, statusCode);
+			pstmt.setTimestamp(2, inquiry_datetime);
+			pstmt.setString(3, inquiryContents);
+			pstmt.setString(4, replyContents);
+			pstmt.setString(5, statusCode);
 			count = pstmt.executeUpdate();
 		}
 		return count;
