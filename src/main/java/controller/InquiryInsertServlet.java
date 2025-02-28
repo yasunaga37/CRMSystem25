@@ -49,6 +49,9 @@ public class InquiryInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// ログインチェック
+		LoginUserChecker.checkLoginUser(request, response);
+		// リクエストパラメータの取得
 		String action = request.getParameter("action");
 		int customer_id = Integer.parseInt(request.getParameter("customer_id"));
 		String url = null;
@@ -99,6 +102,12 @@ public class InquiryInsertServlet extends HttpServlet {
 		return "WEB-INF/view/customer_detail.jsp";
 	}
 	
+	/**
+	 * 新規問合せレコードを挿入する
+	 * @param request
+	 * @param customer_id
+	 * @return 遷移先URL
+	 */
 	private String executeInsert(HttpServletRequest request, int customer_id) {
 //		System.out.println("AAAAAAAAA");
 		InquiryLogic logic = new InquiryLogic();
