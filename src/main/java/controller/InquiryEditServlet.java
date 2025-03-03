@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import logic.CustomerLogic;
 import logic.InquiryLogic;
 import logic.StatusLogic;
 import model.entity.InquiryBean;
@@ -47,12 +48,15 @@ public class InquiryEditServlet extends HttpServlet {
 		String action= request.getParameter("action");
 		// 遷移先URLの取得
 		String url = null;
-		if ("goto_customer_detail".equals(action)) {
+		if ("goto_inquiry_edit".equals(action)) {
 			// お問合せ編集画面へ遷移		
 			url = gotoInquiryEditPage(request);
 		} else if ("inquiry_edit_execute".equals(action)) {
 			// 編集済み問合せ情報登録後にお問合せ情報詳細画面へ遷移
 			url = updateInquiry(request);
+		} else if ("goto_customer_detail".equals(action)) {
+			int customer_id = Integer.parseInt(request.getParameter("customer_id"));
+			url = gotoCustomerDetail(request, customer_id);
 		}
 		// ディスパッチ
 		RequestDispatcher rd = request.getRequestDispatcher(url);
@@ -92,6 +96,16 @@ public class InquiryEditServlet extends HttpServlet {
 		InquiryBean inquiry = ilogic.getInquiryByID(inquiry_id);
 		request.setAttribute("inquiry", inquiry);
 		return "WEB-INF/view/inquiry_show.jsp";	
+	}
+	
+	private String gotoCustomerDetail(HttpServletRequest request, int customer_id) {
+		// 顧客情報の取得
+		CustomerLogic clogic = new CustomerLogic();
+		clogic.setCustomerToRequestScope(request, customer_id);
+		// 問合せ情報の取得
+		InquiryLogic ilogic = new InquiryLogic();
+		ilogic.getInquiryListByCustomerID(request, customer_id);
+		return "WEB-INF/view/customer_detail.jsp";
 	}
 
 }

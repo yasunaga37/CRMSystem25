@@ -58,7 +58,7 @@
 					</form>
 					<form action="inquiry_edit" method="post" class="text-center" style="display: inline-block">
 						<input type="hidden" name="inquiry_id" value="${inquiry.id }">
-						<button type="submit" class="btn btn-primary btn-sm px-5 m-1" name="action" value="goto_customer_detail">編集</button>	
+						<button type="submit" class="btn btn-primary btn-sm px-5 m-1" name="action" value="goto_inquiry_edit">編集</button>	
 					</form>
 					<form action="" class="text-center" style="display: inline-block">
 						<input type="hidden" name="inquiry_id" value="${inquiry.id }">

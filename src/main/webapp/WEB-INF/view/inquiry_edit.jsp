@@ -64,6 +64,7 @@
 
 				<input type="hidden" name="inquiry_id" value="${inquiry.id }">
 				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="inquiry_edit_execute">登録</button>
+				<input type="hidden" name="customer_id" value="${inquiry.customer_id }">
 				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_customer_detail">顧客詳細画面へ戻る</button>
 			</form>
 
