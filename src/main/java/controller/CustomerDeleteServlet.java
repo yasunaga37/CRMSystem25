@@ -48,6 +48,7 @@ public class CustomerDeleteServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("customer_id"));	
 		// パラメータの取得
 		String action = request.getParameter("action");
+		// 遷移先URLの取得
 		String url = null;
 		if ("goto_delete".equals(action)) {
 			// 顧客情報の取得して顧客情報削除画面へ

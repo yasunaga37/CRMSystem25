@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import logic.InquiryLogic;
-import model.entity.Inquiry;
+import model.entity.InquiryBean;
 
 /**
  * Servlet implementation class InquiryDetailServlet
@@ -34,7 +34,7 @@ public class InquiryDetailServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("inquiry_id"));
 //		System.out.println("InquiryDetailServlet#doGet()   " + id);
 		InquiryLogic logic = new InquiryLogic();
-		Inquiry inquiry = logic.getInquiryByID(id);
+		InquiryBean inquiry = logic.getInquiryByID(id);
 		request.setAttribute("inquiry", inquiry);
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/inquiry_show.jsp");
 		rd.forward(request, response);

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import logic.CustomerLogic;
 import logic.InquiryLogic;
 import logic.StatusLogic;
-import model.entity.Inquiry;
+import model.entity.InquiryBean;
 import util.LoginUserChecker;
 
 /**
@@ -111,7 +111,7 @@ public class InquiryInsertServlet extends HttpServlet {
 	private String executeInsert(HttpServletRequest request, int customer_id) {
 //		System.out.println("AAAAAAAAA");
 		InquiryLogic logic = new InquiryLogic();
-		Inquiry inquiry = logic.newInquiry(request);
+		InquiryBean inquiry = logic.newInquiry(request);
 		logic.insertNewInquiry(inquiry);
 		return gotoCustomerDetail(request, customer_id);		
 	}
