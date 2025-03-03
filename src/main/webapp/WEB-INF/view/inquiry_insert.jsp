@@ -56,9 +56,11 @@
 				</div>
 
 				<input type="hidden" name="customer_id" value="${customer.customer_id }">
-				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="inquiry_insert_execute">登録</button>
-				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_customer_detail">顧客詳細画面へ戻る</button>
+				<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="inquiry_insert_execute">登録</button>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="customer_detail?customer_id=${customer.customer_id }">顧客詳細画面へ戻る</a>
+				<!-- <button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_customer_detail">顧客詳細画面へ戻る</button> -->
 			</form>
+			
 
 		</div>
 	</c:param>
