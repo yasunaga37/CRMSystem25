@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.entity.Inquiry;
+import model.entity.InquiryBean;
 
 public class InquiryDAO {
 
@@ -19,8 +19,8 @@ public class InquiryDAO {
 	 * @return List<Inquiry> 当該顧客に関する問合せ一覧
 	 * @throws SQLException
 	 */
-	public List<Inquiry> selectInquiryByCustomerID(int customerID) throws SQLException {
-		List<Inquiry> list = new ArrayList<Inquiry>();
+	public List<InquiryBean> selectInquiryByCustomerID(int customerID) throws SQLException {
+		List<InquiryBean> list = new ArrayList<InquiryBean>();
 		String sql = "SELECT"
 				+ "  ti.inquiry_id, "
 				+ "  ti.inquiry_datetime, "
@@ -46,7 +46,7 @@ public class InquiryDAO {
 			pstmt.setInt(1, customerID);
 			ResultSet res = pstmt.executeQuery();
 			while (res.next()) {
-				Inquiry inquiry = new Inquiry();
+				InquiryBean inquiry = new InquiryBean();
 				inquiry.setId(res.getInt("inquiry_id"));
 				inquiry.setInquiryDatetime(res.getTimestamp("inquiry_datetime"));
 				inquiry.setCustomer_name(res.getString("customer_name"));
@@ -68,8 +68,8 @@ public class InquiryDAO {
 	 * @return Inquiry 当該IDに関する問合せ情報
 	 * @throws SQLException
 	 */
-	public Inquiry selectInquiryByInquiryID (int inquiryID) throws SQLException {
-		Inquiry inquiry = new Inquiry();
+	public InquiryBean selectInquiryByInquiryID (int inquiryID) throws SQLException {
+		InquiryBean inquiry = new InquiryBean();
 		String sql = "SELECT"
 				+ "  ti.inquiry_id, "
 				+ "  ti.inquiry_datetime, "
@@ -115,32 +115,61 @@ public class InquiryDAO {
 		return inquiry;
 	}
 
+//	/**
+//	 * 問合せ情報を更新する
+//	 * @param inquiry 問合せ情報
+//	 * @return int 更新レコード数
+//	 * @throws SQLException
+//	 */
+//	public int updateInquiryByInquiryID (Inquiry inquiry) throws SQLException {
+//		int count = 0;
+//		Timestamp now = new Timestamp(System.currentTimeMillis());
+//		String sql = "UPDATE t_inquiry "
+//					  + " SET "
+//					  + " inquiry_contents = ?, reply_contents = ?, status_code = ?, update_datetime = ? "
+//					  + " WHERE inquiry_id = ?";
+//		try (Connection con = ConnectionManager.getConnection();
+//				PreparedStatement pstmt = con.prepareStatement(sql)) {
+//			pstmt.setString(1, inquiry.getInquiry_contents());
+//			pstmt.setString(2, inquiry.getReply_contents());
+//			pstmt.setString(3, inquiry.getStatus_code());
+//			pstmt.setTimestamp(4, now);
+//			pstmt.setInt(5, inquiry.getId());
+//			count = pstmt.executeUpdate();
+//		}
+//		return count;
+//	}
+	
 	/**
 	 * 問合せ情報を更新する
 	 * @param inquiry 問合せ情報
 	 * @return int 更新レコード数
 	 * @throws SQLException
 	 */
-	public int editInquiryByInquiryID (Inquiry inquiry) throws SQLException {
+	public int updateInquiryByInquiryID (InquiryBean inquiry) throws SQLException {
 		int count = 0;
-		Timestamp now = new Timestamp(System.currentTimeMillis());
 		String sql = "UPDATE t_inquiry "
 					  + " SET "
-					  + " inquiry_contents = ?, reply_contents = ?, status_code = ?, update_datetime = ? "
+					  + " inquiry_contents = ?, reply_contents = ?, status_code = ? "
 					  + " WHERE inquiry_id = ?";
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, inquiry.getInquiry_contents());
 			pstmt.setString(2, inquiry.getReply_contents());
 			pstmt.setString(3, inquiry.getStatus_code());
-			pstmt.setTimestamp(4, now);
-			pstmt.setInt(5, inquiry.getId());
+			pstmt.setInt(4, inquiry.getId());
 			count = pstmt.executeUpdate();
 		}
 		return count;
 	}
-
-	public int insertInquiry (Inquiry inquiry) throws SQLException {
+	
+	/**
+	 * 新規お問合せ登録
+	 * @param inquiry
+	 * @return 新規登録されたレコード数
+	 * @throws SQLException
+	 */
+	public int insertInquiry (InquiryBean inquiry) throws SQLException {
 		int count = 0;
 		int customerID = inquiry.getCustomer_id();
 		Timestamp inquiry_datetime = inquiry.getInquiry_datetime();

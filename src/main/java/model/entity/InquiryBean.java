@@ -3,7 +3,7 @@ package model.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Inquiry implements Serializable {
+public class InquiryBean implements Serializable {
 
 	private int id;
 	private int customer_id;
@@ -18,9 +18,10 @@ public class Inquiry implements Serializable {
 	private int delete_flg;
 	private Timestamp update_datetime;
 
-	public Inquiry() {}
-	
-	public Inquiry(int id, int customer_id, String inquiry_contents,
+	public InquiryBean() {
+	}
+
+	public InquiryBean(int id, int customer_id, String inquiry_contents,
 			String reply_contents, String status_code) {
 		this.id = id;
 		this.customer_id = customer_id;
@@ -28,8 +29,17 @@ public class Inquiry implements Serializable {
 		this.reply_contents = reply_contents;
 		this.status_code = status_code;
 	}
-	
-	public Inquiry(int id, int customer_id, String customer_name, Timestamp inquiry_datetime, String inquiry_contents,
+
+	public InquiryBean(int id, String inquiry_contents,
+			String reply_contents, String status_code) {
+		this.id = id;
+		this.inquiry_contents = inquiry_contents;
+		this.reply_contents = reply_contents;
+		this.status_code = status_code;
+	}
+
+	public InquiryBean(int id, int customer_id, String customer_name, Timestamp inquiry_datetime,
+			String inquiry_contents,
 			String reply_contents, String status_code, String status_name, Timestamp update_datetime) {
 		this.id = id;
 		this.customer_id = customer_id;
@@ -41,8 +51,8 @@ public class Inquiry implements Serializable {
 		this.status_name = status_name;
 		this.update_datetime = update_datetime;
 	}
-	
-	public Inquiry(int customer_id, Timestamp inquiry_datetime, String inquiry_contents, 
+
+	public InquiryBean(int customer_id, Timestamp inquiry_datetime, String inquiry_contents,
 			String reply_contents, String status_code) {
 		this.customer_id = customer_id;
 		this.inquiry_datetime = inquiry_datetime;
@@ -50,13 +60,13 @@ public class Inquiry implements Serializable {
 		this.reply_contents = reply_contents;
 		this.status_code = status_code;
 	}
-	
+
 	/**
 	 * 既存の問合せオブジェクトの内容を「概略」に置き換える
 	 * @param inquiry
 	 * @param summary
 	 */
-	public Inquiry(Inquiry inquiry, String summary) {
+	public InquiryBean(InquiryBean inquiry, String summary) {
 		this.id = inquiry.getId();
 		this.customer_id = inquiry.getCustomer_id();
 		this.customer_name = inquiry.getCustomer_name();
@@ -135,19 +145,19 @@ public class Inquiry implements Serializable {
 	public String getUser_name() {
 		return user_name;
 	}
-	
+
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
-	
+
 	public int getDelete_flg() {
 		return delete_flg;
 	}
-	
+
 	public void setDelete_flg(int delete_flg) {
 		this.delete_flg = delete_flg;
 	}
-	
+
 	public Timestamp getUpdate_datetime() {
 		return update_datetime;
 	}

@@ -51,11 +51,20 @@
 					</tbody>
 				</table>
 				</div>
-				<form action="customer_detail" method="post" class="text-center">
-					<input type="hidden" name="customer_id" value="${inquiry.customer_id }">
-					<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_customer_detail">顧客詳細画面へ戻る</button>
-				</form>
-
+				<div class="d-flex justify-content-center">
+					<form action="customer_detail" method="post" class="text-center" style="display: inline-block">
+						<input type="hidden" name="customer_id" value="${inquiry.customer_id }">
+						<button type="submit" class="btn btn-primary btn-sm px-5 m-1" name="action" value="goto_customer_detail">顧客詳細画面へ戻る</button>									 
+					</form>
+					<form action="inquiry_edit" method="post" class="text-center" style="display: inline-block">
+						<input type="hidden" name="inquiry_id" value="${inquiry.id }">
+						<button type="submit" class="btn btn-primary btn-sm px-5 m-1" name="action" value="goto_customer_detail">編集</button>	
+					</form>
+					<form action="" class="text-center" style="display: inline-block">
+						<input type="hidden" name="inquiry_id" value="${inquiry.id }">
+						<button type="button" class="btn btn-danger btn-sm px-5 m-1" name="action" value="">削除</button>	
+					</form>
+				</div>
 		</div>
 	</c:param>
 </c:import>
