@@ -96,6 +96,7 @@
 									<th scope="col" class="sticky-top">お問合せ日時</th>
 									<th scope="col" class="sticky-top">内容</th>
 									<th scope="col" class="sticky-top">ステータス</th>
+									<th></th>
 									<!-- <th scope="row">更新日時</th> -->
 								</tr>
 							</thead>
@@ -103,18 +104,21 @@
 								<c:choose>
 									<c:when test="${fn:length(inquiry_list) != 0}">
 										<c:forEach var="inquiry" items="${inquiry_list}">
-											<tr>
-												<td><fmt:formatDate value="${inquiry.inquiry_datetime}" pattern="yyyy/MM/dd HH:mm" /></td>
-												<td class="text-start text-wrap"><a href="inquiry_detail?inquiry_id=${ inquiry.id}"><c:out value="${inquiry.inquiry_contents}" /></a></td>
-												<c:choose>
-													<c:when test="${inquiry.status_name == '対応完了'}">
-														<td><c:out value="${inquiry.status_name}" /></td>
-													</c:when>
-													<c:otherwise>
-														<td class="text-danger"><c:out value="${inquiry.status_name}" /></td>
-													</c:otherwise>
-												</c:choose>
-											</tr>
+											<c:if test="${inquiry.delete_flg == 0 }">
+												<tr>
+													<td><fmt:formatDate value="${inquiry.inquiry_datetime}" pattern="yyyy/MM/dd HH:mm" /></td>
+													<td class="text-start text-wrap"><a href="inquiry_detail?inquiry_id=${ inquiry.id}"><c:out value="${inquiry.inquiry_contents}" /></a></td>
+													<c:choose>
+														<c:when test="${inquiry.status_name == '対応完了'}">
+															<td><c:out value="${inquiry.status_name}" /></td>
+														</c:when>
+														<c:otherwise>
+															<td class="text-danger"><c:out value="${inquiry.status_name}" /></td>
+														</c:otherwise>
+													</c:choose>
+													<td><c:out value="${inquiry.delete_flg }"/></td>
+												</tr>
+											</c:if>
 										</c:forEach>
 									</c:when>
 									<c:otherwise>

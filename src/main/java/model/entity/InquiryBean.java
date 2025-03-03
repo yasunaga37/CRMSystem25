@@ -76,6 +76,7 @@ public class InquiryBean implements Serializable {
 		this.status_code = inquiry.getStatus_code();
 		this.status_name = inquiry.getStatus_name();
 		this.update_datetime = inquiry.getUpdate_datetime();
+		this.delete_flg = inquiry.getDelete_flg();
 	}
 
 	public int getId() {

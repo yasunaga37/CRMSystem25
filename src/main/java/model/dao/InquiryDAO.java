@@ -164,6 +164,26 @@ public class InquiryDAO {
 	}
 	
 	/**
+	 * 問合せテーブルの削除フラグを「1」(削除済み)に設定する
+	 * @param id 問合せID
+	 * @return int 更新済みレコード数
+	 * @throws SQLException
+	 */
+	public int deleteInquiryByID(int id) throws SQLException {
+		int count = 0;
+		String sql = "UPDATE t_inquiry "
+				+ " SET "
+				+ " delete_flg = 1 "
+				+ " WHERE inquiry_id = ?";
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, id);
+			count = pstmt.executeUpdate();
+		}
+		return count;
+	}
+	
+	/**
 	 * 新規お問合せ登録
 	 * @param inquiry
 	 * @return 新規登録されたレコード数

@@ -28,6 +28,7 @@ public class InquiryDetailServlet extends HttpServlet {
     }
 
 	/**
+	 * 顧客情報詳細画面の「お問合せ」リンク押下時に呼び出されて、お問合せ詳細画面に遷移する
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,6 +37,7 @@ public class InquiryDetailServlet extends HttpServlet {
 		InquiryLogic logic = new InquiryLogic();
 		InquiryBean inquiry = logic.getInquiryByID(id);
 		request.setAttribute("inquiry", inquiry);
+		request.setAttribute("action", "お問合せ詳細");
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/inquiry_show.jsp");
 		rd.forward(request, response);
 	}

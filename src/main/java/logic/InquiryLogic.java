@@ -145,6 +145,21 @@ public class InquiryLogic {
 		}
 		return count;
 	}
+	
+	public int deleteInquiry(int inquiry_id) {
+		int count = 0;
+		InquiryDAO dao = new InquiryDAO();
+		try {
+			count = dao.deleteInquiryByID(inquiry_id);
+			if (count != 1) {
+				System.out.println("InquiryLogic#deleteInquiry() 問合せ情報の削除に失敗しました。-1");
+			} 
+		} catch (SQLException e) {
+			System.out.println("InquiryLogic#deleteInquiry() 問合せ情報の削除に失敗しました。-2");
+			e.printStackTrace();
+		}
+		return count;
+	}
 
 	/**
 	 * 時刻文字列(yyyy-MM-dd'T'HH:mm:ss)をjava.sql.Timestamp型へ変換する
