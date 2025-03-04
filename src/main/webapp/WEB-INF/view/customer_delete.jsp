@@ -64,10 +64,9 @@
 			<c:choose>
 				<c:when test="${delete_execute == null }">
 					<form action="customer_delete" method="post" class="text-center" autocomplete="off">
-						<input type="hidden" name="customer_id" value="${customer.customer_id }"> ユーザーID：
-						<input type="text" name="user_id"> パスワード：
-						<input type="password" autocomplete="new-password" name="password"><br>
-						<br>
+						<input type="hidden" name="customer_id" value="${customer.customer_id }"> 
+						ユーザーID：<input type="text" name="user_id" required="required"> 
+						パスワード：<input type="password" autocomplete="new-password" name="password" required="required"><br><br>
 						<button type="submit" class="btn btn btn-danger btn-sm px-5" name="action" value="execute_delete" onclick="return confirm('削除してもよろしいですか？')">削除</button>
 						<button type="submit" class="btn btn-primary btn-sm px-5" name="action" value="goto_detail">顧客情報画面へ戻る</button>
 					</form>

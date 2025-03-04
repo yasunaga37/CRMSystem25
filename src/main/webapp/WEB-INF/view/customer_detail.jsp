@@ -96,7 +96,6 @@
 									<th scope="col" class="sticky-top">お問合せ日時</th>
 									<th scope="col" class="sticky-top">内容</th>
 									<th scope="col" class="sticky-top">ステータス</th>
-									<th></th>
 									<!-- <th scope="row">更新日時</th> -->
 								</tr>
 							</thead>
@@ -115,8 +114,7 @@
 														<c:otherwise>
 															<td class="text-danger"><c:out value="${inquiry.status_name}" /></td>
 														</c:otherwise>
-													</c:choose>
-													<td><c:out value="${inquiry.delete_flg }"/></td>
+													</c:choose>	
 												</tr>
 											</c:if>
 										</c:forEach>
